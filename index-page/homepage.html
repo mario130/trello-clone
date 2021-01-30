@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link
+			rel="stylesheet"
+			href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+		/>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
   <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
@@ -75,7 +83,7 @@
 
   <div class="container-fluid bar-2 pb-3">
     <div class="row justify-content-between pt-2">
-      <div class="col pl-2">
+      <div class="col pl-13">
 
         <button class="bar-2-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-menu-app" viewBox="0 0 16 16">
@@ -120,7 +128,7 @@
         </button>
         
       </div>
-      <div class="col-auto">
+      <div class="col-auto pr-3">
         
         <button class="bar-2-btn">
           <span>Butler</span>
@@ -161,13 +169,30 @@
         
         <div class="card-bottom">
           
-          <a href="#" class="card-composer">
+          <a href="#" class="card-composer new-todo-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add another card</a>
         </div>
 
+        <div class="new-task">
+
+          <textarea class="" name="new-task" id="new-task" cols="24" rows="3"></textarea>
+  
+          <div class="add-card-actions">
+            <button class="add-card-btn bar-2-btn">Add card</button>
+  
+            <a href="#" class="cancel-todo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </a>
+  
+          </div>
+        </div>
+
+        
       </div>
 
   
@@ -205,11 +230,27 @@
         
         <div class="card-bottom">
           
-          <a href="#" class="card-composer">
+          <a href="#" class="card-composer new-todo-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add another card</a>
+        </div>
+
+        <div class="new-task">
+
+          <textarea class="" name="new-task" id="new-task" cols="24" rows="3"></textarea>
+  
+          <div class="add-card-actions">
+            <button class="add-card-btn bar-2-btn">Add card</button>
+  
+            <a href="#" class="cancel-todo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </a>
+  
+          </div>
         </div>
 
       </div>
@@ -257,38 +298,30 @@
           </a>
         </div>
 
-        <div class="list-cards">
-          <a href="#" class="list-card">
-            Task 0
-          </a>
-        </div>
-
-        <div class="list-cards">
-          <a href="#" class="list-card">
-            Task 0
-          </a>
-        </div>
-
-        <div class="list-cards">
-          <a href="#" class="list-card">
-            Task 0
-          </a>
-        </div>
-
-        <div class="list-cards">
-          <a href="#" class="list-card">
-            Task 0
-          </a>
-        </div>
-
         
         <div class="card-bottom">
           
-          <a href="#" class="card-composer">
+          <a href="#" class="card-composer new-todo-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
             Add another card</a>
+        </div>
+
+        <div class="new-task">
+
+          <textarea class="" name="new-task" id="new-task" cols="24" rows="3"></textarea>
+  
+          <div class="add-card-actions">
+            <button class="add-card-btn bar-2-btn">Add card</button>
+  
+            <a href="#" class="cancel-todo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+              </svg>
+            </a>
+  
+          </div>
         </div>
 
       </div>
@@ -309,6 +342,6 @@
 
   
   
-
+  <script src="homepage.js"></script>
 </body>
 </html>

@@ -12,7 +12,7 @@
 
 .bar-1-btn, .bar-2-btn {
   border-radius: 3px;
-    border: 0;
+    border: none;
     text-decoration: none;
     align-items: center;
     background-color:hsla(0,0%,100%,.3);
@@ -92,6 +92,7 @@
 .bar-2 {
   background-color: #1f79bf;
   /* height: calc(100vh - 40px); */
+  min-height: calc(100vh - 40px);
 }
 .bar-2 .divider {
     border-left: 1px solid hsla(0,0%,100%,.24);
@@ -193,4 +194,39 @@
 .add-new-list svg {
   position: relative;
   bottom: 2px;
+}
+
+.new-task {
+  display: none;
+}
+.new-task textarea {
+  /* background-color: #fff; */
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+  /* cursor: pointer; */
+  display: block;
+  margin-bottom: 7px;
+  max-width: 250px;
+
+  min-height: 20px;
+  position: relative;
+  border: none;
+  margin: auto;
+  margin-bottom: 7px;
+  text-decoration: none;
+  z-index: 0;
+  color: #000;
+  padding: 5px;
+}
+.add-card-btn {
+  background-color: #5aac44;
+  width: auto;
+  padding: 0 15px;
+  margin: 5px 10px;
+}
+.add-card-actions svg {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  
 }
