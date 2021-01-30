@@ -1,0 +1,123 @@
+.background{
+    position: absolute;
+    background-color:#FAFBFC;
+    left: 0;
+    top:0;
+    width:100%;
+    height: 100%;
+    z-index: -99;
+    position: fixed;
+
+
+}
+.left{
+    position:absolute;
+    width: 300px;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.right{
+    position:absolute;
+    width: 300px;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+.trello-logo{
+    margin: 40px auto;
+    height: 43px;;
+}
+
+.trello-img {
+  display: block;
+width: 100%;
+height: 100%;  
+}
+.inner-section{
+    display: flex;
+    justify-content: center;
+}
+.signup-form {
+margin: 0 auto;
+width: 400px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  padding: 25px 40px;
+  box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+
+}
+
+@media  (max-width:576px) {
+    .signup-form  {
+        max-width: 80%;
+    }
+    .background{
+        display: none;
+    }
+}
+.signup-form .heading {
+  text-align: center;
+  color: #5e6c84;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  line-height: 28px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+.signup-form .form-control{
+    background-color: #FAFBFC;
+}
+.signup-form .form-control:focus {
+  border: 2px solid #4c9aff;
+  box-shadow: 0 0 0;
+}
+.signup-form .terms-links {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  line-height: 16px;
+  color: #5e6c84;
+}
+.signup-form .separator {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.signup-redirect {
+  width: 100%;
+  background-color: #5aac44;
+  color: #fff;
+  font-weight: bold;
+  padding: 4px;
+}
+.signup-redirect:disabled {
+  background-color: #e2e4e6;
+}
+.signup-redirect:hover {
+  color: #fff;
+  background-color: rgb(97, 189, 79);
+}
+
+.login-btn{
+width: 100%;
+background: #fff;
+font-weight: bold;
+box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+border-color: transparent;
+margin-bottom: 16px;
+
+}
+.bottom-form-link {
+  text-align: center;
+  font-size: 14px;
+  display: block;
+  padding: 0;
+}
+.bottom-form-link a {
+  text-decoration: none;
+  color: #0052cc;
+}
