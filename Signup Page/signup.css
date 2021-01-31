@@ -66,6 +66,7 @@ width: 400px;
   margin-bottom: 25px;
   font-weight: bold;
 }
+
 .signup-form .form-control{
     background-color: #FAFBFC;
 }
@@ -92,7 +93,19 @@ width: 400px;
   background-color: #5aac44;
   color: #fff;
   font-weight: bold;
-  padding: 4px;
+  padding: 6px;
+}
+.signup-submit{
+  width: 100%;
+  background-color: #0052cc;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px;
+}
+.signup-submit:hover{
+  color: #fff;
+  background-color: rgb(0, 101, 255);
+
 }
 .signup-redirect:disabled {
   background-color: #e2e4e6;
@@ -101,6 +114,10 @@ width: 400px;
   color: #fff;
   background-color: rgb(97, 189, 79);
 }
+.password-group .input-group-text{
+background-color: #FAFBFC;
+}
+
 
 .login-btn{
 width: 100%;
@@ -120,4 +137,72 @@ margin-bottom: 16px;
 .bottom-form-link a {
   text-decoration: none;
   color: #0052cc;
+}
+/****************** start password **************************/
+.password-progress{
+
+  background: rgb(223, 225, 230);
+  height: 2px;
+      margin-top: 5px;
+      position: relative;
+}
+
+.password-progress::before{
+  
+  background:rgb(223, 225, 230);
+  bottom: 0px;
+  content: "";
+  left: 0px;
+  position: absolute;
+      top: 0px;
+      transition: all 0.2s ease-out 0s;
+  } 
+  .password-progress.weak::before {
+    width: 20%;
+    background: rgb(191, 38, 0)
+  }
+  .password-progress.fair::before {
+    width: 39%;
+    background: rgb(255, 86, 48)
+  }
+  .password-progress.good::before {
+    width: 60%;
+    background: rgb(255, 171, 0)
+  }
+  .password-progress.strong::before {
+    width: 80%;
+    background:rgb(54, 179, 126)
+  }
+  .password-progress.verystrong::before {
+    width: 100%;
+    background: rgb(0, 135, 90)
+  }
+.password-indicator{
+  
+  border-left: 5px solid rgb(255, 255, 255);
+  border-right: 5px solid rgb(255, 255, 255);
+  inset: 0px 19%;
+  position: absolute;
+  
+}
+.password-indicator::after{
+  border-left: 5px solid rgb(255, 255, 255);
+  border-right: 5px solid rgb(255, 255, 255);
+  inset: 0px 30%;
+  content: "";
+  position: absolute;
+}
+.password-text{
+  color: rgb(137, 147, 164);
+  font-size: 12px;
+  height: 16px;
+  line-height: 16px;
+  margin-top: 4px;
+  position: relative;
+  text-align: center;
+}
+
+/********************** common classes ***************/
+.hidden{
+  display: none;
 }
