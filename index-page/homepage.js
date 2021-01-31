@@ -14,23 +14,30 @@ var ls = window.localStorage
 // ls.setItem('listDone', ['task 8', 'task 9'])
 
 function makeCards(){
-  var listTodos = ls.getItem('listTodo').split(',')
-  var listDoing = ls.getItem('listDoing').split(',')
-  var listDone = ls.getItem('listDone').split(',')
+  var listTodos = ls.getItem('listTodo')
+  var listDoing = ls.getItem('listDoing')
+  var listDone = ls.getItem('listDone')
 
+  if (listTodos !== null && listTodos.length !== 0) {
+    listTodos = listTodos.split(',')
+    listTodos.forEach(function(todo, idx) {
+      $('#listTodos').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listTodo">'+todo+'</a></div>')
+    })
+  }
+  if (listDoing !== null && listDoing.length !== 0) {
+    listDoing = listDoing.split(',')
+    listDoing.forEach(function(todo, idx) {
+      $('#listDoing').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listDoing">'+todo+'</a></div>')
+    })
+  }
+  if (listDone !== null && listDone.length !== 0) {
+    listDone = listDone.split(',')
+    listDone.forEach(function(todo, idx) {
+      $('#listDone').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listDone">'+todo+'</a></div>')
+    })
+  }
 
-
-  listTodos.forEach(function(todo, idx) {
-    $('#listTodos').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listTodo">'+todo+'</a></div>')
-  })
-
-  listDoing.forEach(function(todo, idx) {
-    $('#listDoing').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listDoing">'+todo+'</a></div>')
-  })
-
-  listDone.forEach(function(todo, idx) {
-    $('#listDone').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listDone">'+todo+'</a></div>')
-  })
+  
   activateCardDeletion()
 }
 makeCards()
@@ -39,7 +46,12 @@ $('.add-card-btn').click(function(ev){
   var newTodo = $(this).parent().prev().val()
 
   var listName = ev.target.dataset.list
-  var listToBeEdited = ls.getItem(`list${listName}`).split(',')
+  var listToBeEdited = ls.getItem(`list${listName}`)
+  if (listToBeEdited) {
+    listToBeEdited = listToBeEdited.split(',')
+  } else {
+    listToBeEdited = []
+  }
   listToBeEdited.push(newTodo)
   ls.setItem(`list${listName}`, listToBeEdited)
   console.log(ls.getItem('listTodo'));
