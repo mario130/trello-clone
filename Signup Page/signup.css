@@ -1,28 +1,8 @@
-.background{
-    position: absolute;
-    background-color:#FAFBFC;
-    left: 0;
-    top:0;
-    width:100%;
-    height: 100%;
-    z-index: -99;
-    position: fixed;
-
-
-}
-.left{
-    position:absolute;
-    width: 300px;
-    left: 0;
-    bottom: 0;
-    z-index: 1;
-}
-.right{
-    position:absolute;
-    width: 300px;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
+body{
+  background: url("../images/signup-images/left.svg") left 100% no-repeat, url("../images/signup-images/right.svg") right 100% no-repeat;
+  background-attachment: fixed;
+background-size: 25%;
+background-color: aliceblue;
 }
 .trello-logo{
     margin: 40px auto;
@@ -143,8 +123,8 @@ margin-bottom: 16px;
 
   background: rgb(223, 225, 230);
   height: 2px;
-      margin-top: 5px;
-      position: relative;
+  margin-top: 5px;
+  position: relative;
 }
 
 .password-progress::before{
@@ -205,4 +185,29 @@ margin-bottom: 16px;
 /********************** common classes ***************/
 .hidden{
   display: none;
+}
+
+.footer {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 20px;
+  color: cornflowerblue;
+}
+
+.footer ul {
+  list-style: none;
+}
+.footer ul li {
+  display: inline-block;
+  margin: 10px 15px;
+}
+
+.footer ul li a {
+  text-decoration: none;
+  color: cornflowerblue;
+}
+.footer ul li a:hover {
+  text-decoration: underline;
+  color: blue;
 }

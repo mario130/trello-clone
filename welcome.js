@@ -54,3 +54,7 @@ $(".slider li").each(function (index) {
     $("#carousel .board").eq(index).addClass("active").siblings().removeClass("active");
   })
 })
+
+function goToLogIn() {
+  document.location.href = "Signup%20Page/signup.html";
+}

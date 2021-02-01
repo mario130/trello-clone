@@ -1,0 +1,212 @@
+body{
+  background: url("../images/signup-images/left.svg") left 100% no-repeat, url("../images/signup-images/right.svg") right 100% no-repeat;
+  background-attachment: fixed;
+background-size: 25%;
+background-color: aliceblue;
+}
+
+.trello-logo{
+  margin: 40px auto;
+  height: 43px;;
+}
+
+.trello-img {
+display: block;
+width: 100%;
+height: 100%;  
+}
+.inner-section{
+  display: flex;
+  justify-content: center;
+}
+.signup-form {
+margin: 0 auto;
+width: 400px;
+background-color: #ffffff;
+border-radius: 3px;
+padding: 25px 40px;
+box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+
+}
+
+@media  (max-width:576px) {
+  .signup-form  {
+      max-width: 80%;
+  }
+  .background{
+      display: none;
+  }
+}
+.signup-form .heading {
+text-align: center;
+color: #5e6c84;
+font-size: 16px;
+letter-spacing: -0.01em;
+line-height: 28px;
+margin-top: 10px;
+margin-bottom: 25px;
+font-weight: bold;
+}
+
+.signup-form .form-control{
+  background-color: #FAFBFC;
+}
+.signup-form .form-control:focus {
+border: 2px solid #4c9aff;
+box-shadow: 0 0 0;
+}
+.signup-form .terms-links {
+margin-top: 20px;
+margin-bottom: 20px;
+font-size: 12px;
+line-height: 16px;
+color: #5e6c84;
+}
+.signup-form .separator {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.signup-redirect {
+width: 100%;
+background-color: #5aac44;
+color: #fff;
+font-weight: bold;
+padding: 6px;
+}
+.signup-submit{
+width: 100%;
+background-color: #0052cc;
+color: #fff;
+font-weight: bold;
+padding: 6px;
+}
+.signup-submit:hover{
+color: #fff;
+background-color: rgb(0, 101, 255);
+
+}
+.signup-redirect:disabled {
+background-color: #e2e4e6;
+}
+.signup-redirect:hover {
+color: #fff;
+background-color: rgb(97, 189, 79);
+}
+.password-group .input-group-text{
+background-color: #FAFBFC;
+}
+
+
+.login-btn{
+width: 100%;
+background: #fff;
+font-weight: bold;
+box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
+border-color: transparent;
+margin-bottom: 16px;
+}
+.login-btn img {
+  max-width: 18px;
+  max-height: 18px;
+}
+.bottom-form-link {
+text-align: center;
+font-size: 14px;
+display: block;
+padding: 0;
+}
+.bottom-form-link a {
+text-decoration: none;
+color: #0052cc;
+}
+/****************** start password **************************/
+.password-progress{
+
+background: rgb(223, 225, 230);
+height: 2px;
+margin-top: 5px;
+position: relative;
+}
+
+.password-progress::before{
+
+background:rgb(223, 225, 230);
+bottom: 0px;
+content: "";
+left: 0px;
+position: absolute;
+    top: 0px;
+    transition: all 0.2s ease-out 0s;
+} 
+.password-progress.weak::before {
+  width: 20%;
+  background: rgb(191, 38, 0)
+}
+.password-progress.fair::before {
+  width: 39%;
+  background: rgb(255, 86, 48)
+}
+.password-progress.good::before {
+  width: 60%;
+  background: rgb(255, 171, 0)
+}
+.password-progress.strong::before {
+  width: 80%;
+  background:rgb(54, 179, 126)
+}
+.password-progress.verystrong::before {
+  width: 100%;
+  background: rgb(0, 135, 90)
+}
+.password-indicator{
+
+border-left: 5px solid rgb(255, 255, 255);
+border-right: 5px solid rgb(255, 255, 255);
+inset: 0px 19%;
+position: absolute;
+
+}
+.password-indicator::after{
+border-left: 5px solid rgb(255, 255, 255);
+border-right: 5px solid rgb(255, 255, 255);
+inset: 0px 30%;
+content: "";
+position: absolute;
+}
+.password-text{
+color: rgb(137, 147, 164);
+font-size: 12px;
+height: 16px;
+line-height: 16px;
+margin-top: 4px;
+position: relative;
+text-align: center;
+}
+
+.footer {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 20px;
+  color: cornflowerblue;
+}
+
+.footer ul {
+  list-style: none;
+}
+.footer ul li {
+  display: inline-block;
+  margin: 10px 15px;
+}
+
+.footer ul li a {
+  text-decoration: none;
+  color: cornflowerblue;
+}
+.footer ul li a:hover {
+  text-decoration: underline;
+  color: blue;
+}
