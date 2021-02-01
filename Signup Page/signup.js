@@ -5,7 +5,7 @@ $(".password-progress::before").css("background", "red")
     const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     // validate email and make the input enabled if it is valid
     $("#email").on("keyup",  function() {
-    if(validateInput(this,emailRegExp)){
+    if(validateInput($("#email"),emailRegExp)){
         $("#signup-continue").attr("disabled", false)
         return true
     } else {
@@ -18,8 +18,8 @@ $(".password-progress::before").css("background", "red")
     $("#signup-continue").on("click",function () {
         $(this).addClass("hidden")
         $("#signup-submit").removeClass("hidden")
-        $("#fullName").parent().slideDown().end().removeClass("hidden")
-        $("#password").parent().slideDown().end().removeClass("hidden")
+        $("#fullName").parent().removeClass("hidden")
+        $("#password").parent().removeClass("hidden")
 
         $("#password-validation").removeClass("hidden")
 
@@ -32,9 +32,7 @@ $(".password-progress::before").css("background", "red")
         const fullName = $("#fullName").val()
         const password = $("#password").val()
 
-        if(email&&fullName&&password){
-            alert("submited"+email)
-        }
+        console.log(checkFullName())
       })
       /*************************************** */
 
@@ -54,7 +52,7 @@ $("#password").on("keyup",checkPasswordStrength)
 $("#fullName").on("change",checkFullName)
 })
 function checkFullName() {
-    if(! validateInput(this,/^([\w]{3,})+\s+([\w\s]{3,})+$/i) ){
+    if(! validateInput($("#fullName"),/^([\w]{3,})+\s+([\w\s]{3,})+$/i) ){
         $("#name-error").text("Invalid full name")
         return false
    } else{
@@ -68,7 +66,7 @@ function checkFullName() {
 
 //validate any input -- using regexp
 function validateInput(input,RegExp){
-   if( input.value.match(RegExp))
+   if( input.val().match(RegExp))
    return true
    else return false
 }
