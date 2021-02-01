@@ -1,10 +1,13 @@
-
-
 //global variables
 const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const nameRegExp = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
 
+const login =
+  "<a class= 'redirect-login' href='./../log-in/login.html'>login</a>";
+
 $(document).ready(function () {
+  const users = JSON.parse(localStorage.getItem("users")) || [];
+
   $(".password-progress::before").css("background", "red");
   // validate email and make the input enabled if it is valid
   $("#email").on("keyup", function () {
@@ -18,13 +21,28 @@ $(document).ready(function () {
   });
   /*************************************** */
 
+  let isRegistered = false;
   $("#signup-continue").on("click", function () {
-    $(this).addClass("hidden");
-    $("#signup-submit").removeClass("hidden");
-    $("#fullName").parent().removeClass("hidden");
-    $("#password").parent().removeClass("hidden");
+    isRegistered = false;
+    const email = $("#email").val();
+    users.map(function (user) {
+      if (user.email === email) {
+        $("#errorMsg")
+          .fadeIn("slow")
+          .text("Email already in use by another account. You can use ");
+        $("#errorMsg").append(login);
+        isRegistered = true;
+      }
+    });
+    if (!isRegistered) {
+      $("#errorMsg").fadeOut("slow").text("");
+      $(this).addClass("hidden");
+      $("#signup-submit").removeClass("hidden");
+      $("#fullName").parent().removeClass("hidden");
+      $("#password").parent().css("display", "flex");
 
-    $("#password-validation").removeClass("hidden");
+      $("#password-validation").removeClass("hidden");
+    }
   });
   /*************************************** */
 
@@ -33,20 +51,25 @@ $(document).ready(function () {
     const email = $("#email").val();
     const fullName = $("#fullName").val();
     const password = $("#password").val();
-
-    if (validateInput($("#email"), emailRegExp)) {
+    isRegistered = false;
+    users.map(function (user) {
+      if (user.email === email) {
+        isRegistered = true;
+      }
+    });
+    if (!isRegistered) {
       if (validateInput($("#fullName"), nameRegExp)) {
         if (password.length > 8) {
           $("#errorMsg").fadeOut("slow").text("");
           const user = {
-            id:generateId(),
+            id: generateId(),
             email,
             fullName,
             password,
           };
           //saving in localstoragw
-          const users = JSON.parse(localStorage.getItem("users")) || [];
-          const newUsers = [...users, user];
+          const currentUsers = JSON.parse(localStorage.getItem("users")) || [];
+          const newUsers = [...currentUsers, user];
           localStorage.setItem("users", JSON.stringify(newUsers));
           //initialize values again after login
           $("#email").val("");
@@ -63,7 +86,10 @@ $(document).ready(function () {
         $("#errorMsg").fadeIn("slow").text("Invalid Name");
       }
     } else {
-      $("#errorMsg").text("Invalid Email");
+      $("#errorMsg")
+        .fadeIn("slow")
+        .text("Email already in use by another account. You can use ");
+      $("#errorMsg").append(login);
     }
   });
   /*************************************** */
@@ -188,3 +214,18 @@ window.onload = function () {
   }
 };
 
+/************************* */
+// function validateEmail( anyUsers) {
+//   let isValid= false
+//   anyUsers.map(function (user) {
+//     if (user.email === email){
+//       console.log("checked")
+//       $("#errorMsg").fadeIn("slow").text("Email already in use by another account. You can use " );
+//       $("#errorMsg").append(login)
+//       isValid =  false
+//     } else {
+
+//     }
+//   })
+//   return isValid
+//  }

@@ -181,11 +181,18 @@ margin-bottom: 16px;
   position: relative;
   text-align: center;
 }
+.redirect-login{
+  color: #ffffff;
+}
+.redirect-login:hover{
+  color: #ffffff;
+}
 .error-message{
   background: #eb5a46;
     color: #fbedeb;
     font-size: 16px;
   line-height: 1.5;
+  padding: 12px 16px;
   }
 
 /********************** common classes ***************/
