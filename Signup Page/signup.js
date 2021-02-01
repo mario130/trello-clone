@@ -51,7 +51,7 @@ $(document).ready(function () {
           $("#fullName").val("");
           $("#password").val("");
           //routing to login Page
-          window.location.replace("/index-page/homepage.html")
+          window.location.replace("../index-page/homepage.html")
         } else {
      
           $("#errorMsg")
