@@ -21,26 +21,26 @@
     <div class="inner-section ">
       <div class="wrapper-section">
         <section class="signup-form">
-
+          <div id="errorMsg" class="error-message hidden"></div>
           <h1 class="heading">Sign up for your account</h1>
           <form id="signup" class="sign-up-container">
 
             <div class="mb-4">
 
               <input type="email" name="email" id="email" class="form-control" value="" placeholder="Enter email"
-                autocomplete="email">
+                autocomplete="email" required>
             </div>
 
             <div class="mb-4 hidden">
 
               <input type="text" name="name" id="fullName" class="form-control " value="" placeholder="Enter full name"
-                autocomplete="off">
+                autocomplete="off" required>
               <small id="name-error" class="form-text text-muted text-danger "></small>
 
             </div>
             <div class="input-group mb-4 hidden password-group">
               <input type="password" name="password" id="password" class="form-control " value=""
-                placeholder="Create password" autocomplete="new-password">
+                placeholder="Create password" autocomplete="new-password" required>
               <span class="input-group-text " id="eye-icon">
                 <i class="bi bi-eye-slash"></i>
               </span>
@@ -53,7 +53,7 @@
             </div>
 
 
-            <div id="email-error" class="error-message"></div>
+            
             <p class="terms-links "> By signing up, you confirm that you've read and accepted our <a
                 href="https://trello.com/legal" target="_blank">Terms of
                 Service</a> and <a href="https://trello.com/privacy" target="_blank">Privacy Policy</a>.
