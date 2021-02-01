@@ -1,91 +1,93 @@
+// slide down on click 
 $(".new-todo-btn").click(function () {
-  $(this).parent().next(".new-task").slideToggle().children('textarea').focus();
-  
+  $(this).parent().next(".new-task").slideToggle().children("textarea").focus();
+  $(this).parents('.card-wrapper').siblings().find('.new-task').slideUp()
 });
 
 $(".cancel-todo").click(function () {
 	$(this).parents(".new-task").slideUp();
 });
 
+var ls = window.localStorage;
 
-var ls = window.localStorage
-// ls.setItem('listTodo', ['task 1', 'task 2', 'task 3'])
-// ls.setItem('listDoing', ['task 4', 'task 5', 'task 6', 'task 7'])
-// ls.setItem('listDone', ['task 8', 'task 9'])
+// rendering cards to their lists
+function makeCards() {
+	var lists = JSON.parse(ls.getItem("todos"));
 
-function makeCards(){
-  var listTodos = ls.getItem('listTodo')
-  var listDoing = ls.getItem('listDoing')
-  var listDone = ls.getItem('listDone')
-
-  if (listTodos !== null && listTodos.length !== 0) {
-    listTodos = listTodos.split(',')
-    listTodos.forEach(function(todo, idx) {
-      $('#listTodos').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listTodo">'+todo+'</a></div>')
-    })
-  }
-  if (listDoing !== null && listDoing.length !== 0) {
-    listDoing = listDoing.split(',')
-    listDoing.forEach(function(todo, idx) {
-      $('#listDoing').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listDoing">'+todo+'</a></div>')
-    })
-  }
-  if (listDone !== null && listDone.length !== 0) {
-    listDone = listDone.split(',')
-    listDone.forEach(function(todo, idx) {
-      $('#listDone').children('.card-bottom').before('<div class="list-cards"><a href="#" class="list-card" data-idx='+idx+' data-list="listDone">'+todo+'</a></div>')
-    })
-  }
-
-  
-  activateCardDeletion()
+	if (lists) {
+		lists.forEach(function (listItem) {
+			if (listItem.list === "listTodo") {
+				$("#listTodos")
+					.children(".card-bottom")
+					.before(
+						'<div class="list-cards"><a href="#" class="list-card">' +
+							listItem.name +
+							"</a></div>"
+					);
+			} else if (listItem.list === "listDoing") {
+				$("#listDoing")
+					.children(".card-bottom")
+					.before(
+						'<div class="list-cards"><a href="#" class="list-card">' +
+							listItem.name +
+							"</a></div>"
+					);
+			} else if (listItem.list === "listDone") {
+				$("#listDone")
+					.children(".card-bottom")
+					.before(
+						'<div class="list-cards"><a href="#" class="list-card">' +
+							listItem.name +
+							"</a></div>"
+					);
+			}
+		});
+	}
 }
-makeCards()
+makeCards();
 
-$('.add-card-btn').click(function(ev){
-  var newTodo = $(this).parent().prev().val()
+// add new todo to local storage
+$(".add-card-btn").click(function (ev) {
+	var todoName = $(this).parent().prev().val();
 
-  var listName = ev.target.dataset.list
-  var listToBeEdited = ls.getItem(`list${listName}`)
-  if (listToBeEdited) {
-    listToBeEdited = listToBeEdited.split(',')
-  } else {
-    listToBeEdited = []
-  }
-  listToBeEdited.push(newTodo)
-  ls.setItem(`list${listName}`, listToBeEdited)
-  console.log(ls.getItem('listTodo'));
-  
-  $(this).parents('.new-task').prev().before('<div class="list-cards"><a href="#" class="list-card">'+newTodo+'</a></div>')
-  $(this).parent().prev().val('')
-  
-  deleteAllCards()
-  makeCards()
+	var listName = ev.target.dataset.list;
+	var listToBeEdited = JSON.parse(ls.getItem(`todos`)) || [];
+	var todo2BeAdded = { name: todoName, list: "list" + listName };
 
-  activateCardDeletion()
-})
+	listToBeEdited.push(todo2BeAdded);
+	ls.setItem("todos", JSON.stringify(listToBeEdited));
 
-function activateCardDeletion() {
-  $('.list-card').click(function(ev){
-    // var idx = ev.target.dataset.idx;
-    var listName = ev.target.dataset.list
-    var todoContent = ev.target.innerText
-    var todosBeforeDeletion = ls.getItem(listName).split(',')
+	$(this)
+		.parents(".new-task")
+		.prev()
+		.before(
+			'<div class="list-cards"><a href="#" class="list-card">' +
+				todoName +
+				"</a></div>"
+		);
+	$(this).parent().prev().val("");
+	$(this).parents(".new-task").children("textarea").focus();
 
-    var newTodos = todosBeforeDeletion.filter(function(todo) {
-      if(todo === todoContent) {
-        return false
-      } else {
-        return true
-      }
-    })
-    ls.setItem(listName, newTodos)
-    deleteAllCards()
-    makeCards()
-  })
-}
-activateCardDeletion()
+	deleteAllCards();
+	makeCards();
+});
 
+// FOR RENDERING
 function deleteAllCards() {
-  $('.list-cards').remove()
+	$(".list-cards").remove();
 }
+
+// FOR TESTING
+function deleteAllTodos() {
+	ls.removeItem("todos");
+
+	deleteAllCards();
+	makeCards();
+}
+
+// detecting clicks outside lists to close the card composer
+$(document.body).click(function(ev){
+  if (ev.target.classList.contains('container-fluid') || ev.target.classList.contains('row') ||ev.target.classList.contains('col')){
+    $('.new-task').slideUp()
+  }
+})
