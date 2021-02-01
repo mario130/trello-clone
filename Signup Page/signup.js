@@ -1,3 +1,5 @@
+
+
 //global variables
 const emailRegExp = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const nameRegExp = /^([\w]{3,})+\s+([\w\s]{3,})+$/i;
@@ -37,13 +39,13 @@ $(document).ready(function () {
         if (password.length > 8) {
           $("#errorMsg").fadeOut("slow").text("");
           const user = {
-            id: "1",
+            id:generateId(),
             email,
             fullName,
             password,
           };
           //saving in localstoragw
-            const users = JSON.parse(localStorage.getItem("users")) || [];
+          const users = JSON.parse(localStorage.getItem("users")) || [];
           const newUsers = [...users, user];
           localStorage.setItem("users", JSON.stringify(newUsers));
           //initialize values again after login
@@ -51,19 +53,16 @@ $(document).ready(function () {
           $("#fullName").val("");
           $("#password").val("");
           //routing to login Page
-          window.location.replace("/index-page/homepage.html")
+          window.location.replace("/index-page/homepage.html");
         } else {
-     
           $("#errorMsg")
             .fadeIn("slow")
             .text("Password should be Greater than 8 characters");
         }
       } else {
-       
         $("#errorMsg").fadeIn("slow").text("Invalid Name");
       }
     } else {
-      
       $("#errorMsg").text("Invalid Email");
     }
   });
@@ -188,3 +187,4 @@ window.onload = function () {
     return false;
   }
 };
+
