@@ -31,20 +31,23 @@
                 autocomplete="email" required>
             </div>
 
-            <div class="mb-4 hidden">
+            <div id="login-details" class="hidden">
+              <div class="mb-4">
 
-              <input type="text" name="name" id="fullName" class="form-control " value="" placeholder="Enter full name"
-                autocomplete="off" required>
-              <small id="name-error" class="form-text text-muted text-danger "></small>
+                <input type="text" name="name" id="fullName" class="form-control " value="" placeholder="Enter full name"
+                  autocomplete="off" required>
+                <small id="name-error" class="form-text text-muted text-danger "></small>
+  
+              </div>
+              <div class="input-group mb-4 password-group">
+                <input type="password" name="password" id="password" class="form-control " value=""
+                  placeholder="Create password" autocomplete="new-password" required>
+                <span class="input-group-text " id="eye-icon">
+                  <i class="bi bi-eye-slash"></i>
+                </span>
+              </div>
+            </div>
 
-            </div>
-            <div class="input-group mb-4 hidden password-group">
-              <input type="password" name="password" id="password" class="form-control " value=""
-                placeholder="Create password" autocomplete="new-password" required>
-              <span class="input-group-text " id="eye-icon">
-                <i class="bi bi-eye-slash"></i>
-              </span>
-            </div>
             <div class=" hidden" id="password-validation">
               <div class="password-progress">
                 <span class="password-indicator"></span>

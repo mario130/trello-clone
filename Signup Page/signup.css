@@ -119,6 +119,9 @@ margin-bottom: 16px;
   color: #0052cc;
 }
 /****************** start password **************************/
+#eye-icon{
+  cursor: pointer;
+}
 .password-progress{
 
   background: rgb(223, 225, 230);

@@ -38,8 +38,7 @@ $(document).ready(function () {
       $("#errorMsg").fadeOut("slow").text("");
       $(this).addClass("hidden");
       $("#signup-submit").removeClass("hidden");
-      $("#fullName").parent().removeClass("hidden");
-      $("#password").parent().css("display", "flex");
+      $('#login-details').slideDown()
 
       $("#password-validation").removeClass("hidden");
     }
