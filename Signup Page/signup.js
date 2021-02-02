@@ -70,6 +70,7 @@ $(document).ready(function () {
           const currentUsers = JSON.parse(localStorage.getItem("users")) || [];
           const newUsers = [...currentUsers, user];
           localStorage.setItem("users", JSON.stringify(newUsers));
+          localStorage.setItem('activeUserID', JSON.stringify(user.id))
           //initialize values again after login
           $("#email").val("");
           $("#fullName").val("");

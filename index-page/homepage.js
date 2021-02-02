@@ -8,18 +8,18 @@ $(".cancel-todo").click(function () {
 	$(this).parents(".new-task").slideUp();
 });
 
-var textareas = $('textarea')
-textareas.keydown(function(e){
+var textareas = $("textarea");
+textareas.keydown(function (e) {
 	if (e.keyCode == 13) {
-		$(this).next().children('button').click()
-		e.preventDefault()
+		$(this).next().children("button").click();
+		e.preventDefault();
 	}
-})
-$(document.body).keydown(function(e) {
+});
+$(document.body).keydown(function (e) {
 	if (e.keyCode == 27) {
-		$(".new-task").slideUp()
+		$(".new-task").slideUp();
 	}
-})
+});
 
 var ls = window.localStorage;
 var selectedBoard;
@@ -128,14 +128,15 @@ makeCards();
 // add new todo to local storage
 $(".add-card-btn").click(function (ev) {
 	var todoName = $(this).parent().prev().val();
-	if (todoName.trim() === '') return
+	if (todoName.trim() === "") return;
 	var listName = ev.target.dataset.list;
 
 	var todo2BeAdded = {
 		id: generateId(20),
 		title: todoName,
 		isDone: false,
-		team: [],
+		team: [ls.getItem("activeUserID")],
+		description: ''
 	};
 
 	lists[listName].push(todo2BeAdded);
@@ -187,13 +188,13 @@ $(document.body).click(function (ev) {
 		ev.target.classList.contains("row") ||
 		ev.target.classList.contains("col")
 	) {
-		$("textarea").val('');
+		$("textarea").val("");
 		$(".new-task").slideUp();
 	}
 });
 
 // logout logic
 function logOut() {
-	ls.removeItem('currentUserId')
-	location.assign('/log-in/login.html')
+	ls.removeItem("activeUserID");
+	location.assign("/log-in/login.html");
 }
