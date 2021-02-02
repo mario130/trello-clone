@@ -28,6 +28,14 @@ padding: 25px 40px;
 box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
 
 }
+.error-message {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 20px auto;
+  display: none;
+}
 
 @media  (max-width:576px) {
   .signup-form  {
