@@ -79,8 +79,8 @@ $("#listItems").on("click", ".new-todo-btn",function (e) {
 	e.preventDefault()
 	$(this).parent().next(".new-task").slideToggle().children("textarea").focus();
   $(this).parents(".card-wrapper").siblings().find(".new-task").slideUp();
-  $(this).slideUp();
-  $(this).parents(".card-wrapper").siblings().find(".new-todo-btn").show();
+  // $(this).slideUp();
+  // $(this).parents(".card-wrapper").siblings().find(".new-todo-btn").show();
 });
 
 ///// close todo
@@ -91,24 +91,24 @@ $("#listItems").on("click",".cancel-todo",function () {
 });
 
 //// press ENTER in keyboard
-var textareas = $("textarea");
-textareas.keydown(function (e) {
+$("#listItems").on("keydown","textarea",(function (e) {
+  
   if (e.keyCode == 13) {
     $(this).next().children("button").click();
     e.preventDefault();
   }
-});
-/// press ESC in keyboard
-$(document.body).keydown(function (e) {
-  if (e.keyCode == 27) {
-    $(".new-task").slideUp();
-  }
-});
+  console.log('sadsad');
+}));
+// /// press ESC in keyboard - needs some work
+// $("textarea").on("keydown",(function (e) {
+//   if (e.keyCode == 27) {
+//     $(".new-task").slideUp();
+//   }
+// }));
 
 //click on add-card-btn and adding todo in
 
 $("#listItems").on("click",".add-card-btn",function (ev) {
-	console.log($(this))
   var todoName = $(this).parent().prev().val();
   if (todoName.trim() === "") return;
 

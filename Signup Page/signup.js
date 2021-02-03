@@ -51,7 +51,7 @@ $(document).ready(function () {
     const fullName = $("#fullName").val();
     const password = $("#password").val();
     isRegistered = false;
-    users.map(function (user) {
+    users.forEach(function (user) {
       if (user.email === email) {
         isRegistered = true;
       }
