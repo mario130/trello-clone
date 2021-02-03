@@ -15,11 +15,22 @@
 	border: none;
 	text-decoration: none;
 	align-items: center;
-	background-color: hsla(0, 0%, 100%, 0.3);
+	background-color: rgba(255, 255, 255, 0.3);
 	box-shadow: none;
 	color: #fff;
 	height: 30px;
+	transition: all .4s ease-out;
 }
+.bar-1-btn:focus,
+.bar-2-btn:focus{
+	border: none;
+	outline: none;
+}
+.bar-1-btn:hover,
+.bar-2-btn:hover{
+	background-color: rgba(255, 255, 255, 0.4);;
+}
+
 .bar-2-btn {
 	margin-bottom: 5px;
 }
@@ -94,6 +105,13 @@
 }
 .bar-2-btn span {
 	font-size: 14px;
+}
+#favourite svg{
+	position: relative;
+	bottom: 2px;
+}
+#favourite:hover svg{
+	fill: yellow;
 }
 
 /* CARDS */
