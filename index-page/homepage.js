@@ -56,6 +56,7 @@ function makeCards() {
 	}
 
 	selectedBoard = selectedBoard ? selectedBoard : "Board 1";
+	$('.currentBoardName').html(selectedBoard)
 	lists = {
 		// todos to be rendered (name only)
 		Todos: [],
@@ -97,7 +98,7 @@ function makeCards() {
 		$("#listTodos")
 			.children(".card-bottom")
 			.before(
-				'<div class="list-cards"><a href="#" class="list-card">' +
+				'<div class="list-cards"><a href="#" class="list-card" data-id='+todo.id+'>' +
 					todo +
 					"</a></div>"
 			);
@@ -107,7 +108,7 @@ function makeCards() {
 		$("#listDoing")
 			.children(".card-bottom")
 			.before(
-				'<div class="list-cards"><a href="#" class="list-card">' +
+				'<div class="list-cards"><a href="#" class="list-card" data-id='+todo.id+'>' +
 					todo +
 					"</a></div>"
 			);
@@ -117,11 +118,22 @@ function makeCards() {
 		$("#listDone")
 			.children(".card-bottom")
 			.before(
-				'<div class="list-cards"><a href="#" class="list-card">' +
+				'<div class="list-cards"><a href="#" class="list-card" data-id='+todo.id+'>' +
 					todo +
 					"</a></div>"
 			);
 	});
+	$('.list-card').click(function(){
+		// $('.modal-content').html('<h2>hello</h2>')
+		$('.modal-title').html(this.textContent)
+
+		// var todo = 
+
+		$('#desc').html()
+		
+		
+		$('#myModal').modal('show')
+	})
 }
 makeCards();
 
