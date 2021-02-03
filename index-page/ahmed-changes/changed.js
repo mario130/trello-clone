@@ -1,20 +1,26 @@
 //data
   /******************** Data Store ******************** */
   //initialize data
-var boards = getData("boards") ||
-   [
-	  {
-		  id: generateId(5),
-      title: "board1",
-      todos:[],
-		  lists: [
-			  { id: generateId(5), listName: "todos", todos: [] },
-			  { id: generateId(5), listName: "doing", todos: [] },
-			  { id: generateId(5), listName: "done", todos: [] },
-			],
-		},
-  ];
-
+var boards = getData("boards") 
+if (!boards){
+  createBasicBoard()
+}
+function createBasicBoard(){
+  boards = 
+  [
+   {
+     id: generateId(5),
+     title: "board1",
+     todos:[],
+     lists: [
+       { id: generateId(5), listName: "todos", todos: [] },
+       { id: generateId(5), listName: "doing", todos: [] },
+       { id: generateId(5), listName: "done", todos: [] },
+     ],
+   },
+ ];
+ saveData('boards', boards)
+}
 
   /*************************** Rendering ********************************* */
   //render
@@ -113,7 +119,7 @@ var boards = getData("boards") ||
    
    saveData("boards",boards)
 
-   
+   console.log(boards[0].todos);
     renderTodos(boards[0].todos);
     $(this).parent().prev().val("");
     $(this).parents(".new-task").children("textarea").focus();
@@ -224,6 +230,14 @@ var boards = getData("boards") ||
     localStorage.removeItem('boards');
     
   }
+  function getBasicBoard(){
+    boards[0].lists = []
+    boards[0].todos = []
+    createBasicBoard()
+    saveData('boards', boards)
+    renderList(boards[0].lists,boards[0].todos);
+    renderTodos(boards[0].todos);
+  }
   /*************          changes      ***************/
 
   /******************* conponents ******************************* */
@@ -254,7 +268,7 @@ var boards = getData("boards") ||
 		<textarea class="" name="new-task" cols="24" rows="3"></textarea>
 
 		<div class="add-card-actions">
-		  <button class="add-card-btn bar-2-btn" data-list=${list.listName}>Add card</button>
+		  <button class="add-card-btn bar-2-btn" data-list="${list.listName}">Add card</button>
 
 		  <a href="#" class="cancel-todo">
 			<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
