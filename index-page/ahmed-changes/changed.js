@@ -1,5 +1,4 @@
 //data
-$(document).ready(function () {
   /******************** Data Store ******************** */
   //initialize data
 var boards = getData("boards") ||
@@ -14,7 +13,7 @@ var boards = getData("boards") ||
 			  { id: generateId(5), listName: "done", todos: [] },
 			],
 		},
-	];
+  ];
 
 
   /*************************** Rendering ********************************* */
@@ -70,7 +69,8 @@ var boards = getData("boards") ||
   $("#listItems").on("click", ".cancel-todo", function () {
     $(this).parents(".new-task").slideUp();
 
-    $(this).parents(".new-task").siblings().eq(1).find(".new-todo-btn").show();
+    // $(this).parents(".new-task").siblings().eq(1).find(".new-todo-btn").show();
+    $('.new-todo-btn').slideDown()
   });
 
   //// press ENTER in keyboard
@@ -84,11 +84,12 @@ var boards = getData("boards") ||
   /// press ESC in keyboard
   $(document.body).keydown(function (e) {
     if (e.keyCode == 27) {
+      $("textarea").val("");
       $(".new-task").slideUp();
-      $(".new-todo-btn").show();
+      $(".new-todo-btn").slideDown();
       // close list tab
-      $(".new-list").slideUp();
-      $("#addAnotherList").show();
+      $(".new-list").hide();
+      $("#addAnotherList").fadeIn();
     }
   });
 
@@ -120,17 +121,19 @@ var boards = getData("boards") ||
 
   // detecting clicks outside lists to close the card composer
   $(document.body).click(function (ev) {
+    ev.stopPropagation();
     if (
       ev.target.classList.contains("container-fluid") ||
       ev.target.classList.contains("row") ||
-      ev.target.classList.contains("col")
+      ev.target.classList.contains("col") ||
+      ev.target.id === 'listItems'
     ) {
       $("textarea").val("");
       $(".new-task").slideUp();
-      $(".new-todo-btn").show();
+      $(".new-todo-btn").slideDown();
 
-      $("#addAnotherList").show();
-      $(".new-list").slideUp();
+      $(".new-list").hide();
+      $("#addAnotherList").fadeIn();
     }
   });
 
@@ -145,18 +148,56 @@ var boards = getData("boards") ||
         todos: [],
       };
       boards[0].lists.push(list);
+      saveData('boards', boards)
       renderList(boards[0].lists,boards[0].todos);
       renderTodos(boards[0].todos);
     }
 
     $(this).parent().prev().val("");
+    $(".new-list").hide();
+    $("#addAnotherList").fadeIn();
+    console.log(boards);
   });
+  // delete list
+  function deleteList(that){
+    var ans = confirm('Are you sure?');
+    if (ans){
+
+      var listNameToBeDeleted = $(that).prev().html()
+      for(let i = 0; i < boards[0].lists.length; i++){
+        if (boards[0].lists[i].listName === listNameToBeDeleted){
+          var listIdxToBeDeleted = i
+          console.log(boards[0].lists[i].listName);
+        }
+      }
+      if (listIdxToBeDeleted > -1) {
+        console.log('present', listIdxToBeDeleted);
+        boards[0].lists.splice(listIdxToBeDeleted, 1)
+        console.log(boards);
+        saveData('boards', boards)
+        renderList(boards[0].lists,boards[0].todos);
+        renderTodos(boards[0].todos);
+        console.log('deleted');
+      }
+    }
+  }
 
   //showing edit list item
   $("#addAnotherList").click(function () {
-    $(this).next().slideToggle();
+    $(this).next().fadeIn().children('input').focus();
     $(this).hide();
   });
+  $('#newList').on("keydown", function(e){
+    if (e.keyCode === 13) {
+      $(this).next().children('button').click()
+    } else if (e.keyCode === 27) {
+      // $(this).
+    }
+  })
+  $('#cancel-list').click(function(){
+    $(".new-list").hide();
+    $("#addAnotherList").fadeIn();
+  })
   /***************************************************************** */
 
   // FOR RENDERING
@@ -178,6 +219,11 @@ var boards = getData("boards") ||
     localStorage.removeItem("activeUserID");
     location.assign("/log-in/login.html");
   }
+  // delete local storage
+  function deleteLocalStorage(){
+    localStorage.removeItem('boards');
+    
+  }
   /*************          changes      ***************/
 
   /******************* conponents ******************************* */
@@ -187,9 +233,9 @@ var boards = getData("boards") ||
 	<div class="card" id="${list.listName}">
 	  <div class="card-header mb-1">
 		<h2>${list.listName}</h2>
-		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
-		  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
-		</svg>
+		<button onclick="deleteList(this)" class="delete-list">
+      <svg height="365pt" viewBox="0 0 365.71733 365" width="365pt" xmlns="http://www.w3.org/2000/svg"><g fill="#f44336"><path d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"/><path d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"/></g></svg>
+    </button>
 	  </div>
 
 
@@ -225,4 +271,3 @@ var boards = getData("boards") ||
   </div>`;
   }
   console.log(boards[0])
-});
