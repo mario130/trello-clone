@@ -2,11 +2,12 @@
 $(document).ready(function () {
   /******************** Data Store ******************** */
   //initialize data
-  var boards = [
+var boards = getData("boards") ||
+   [
 	  {
 		  id: generateId(5),
-		  title: "board1",
-		  todos: [],
+      title: "board1",
+      todos:[],
 		  lists: [
 			  { id: generateId(5), listName: "todos", todos: [] },
 			  { id: generateId(5), listName: "doing", todos: [] },
@@ -14,9 +15,8 @@ $(document).ready(function () {
 			],
 		},
 	];
-	saveData("boards", boards);
-	var todos = getData("boards")[0].todos || [];
-	var lists = getData("boards")[0].lists || [];
+
+
   /*************************** Rendering ********************************* */
   //render
   function renderTodos(todos) {
@@ -33,7 +33,7 @@ $(document).ready(function () {
   }
 
   //   renderTodos(todos);
-  function renderList(lists) {
+  function renderList(lists,todos) {
     deleteAllLists();
     lists.map((list) => {
       todos.map((todo) => {
@@ -44,8 +44,9 @@ $(document).ready(function () {
 
       $("#listItems").append(listComponent(list));
     });
+    renderTodos(todos)
   }
-  renderList(lists);
+  renderList(boards[0].lists,boards[0].todos);
 
   /**************************** handling by events ************************************* */
 
@@ -107,9 +108,12 @@ $(document).ready(function () {
       isDone: false,
     };
 
-	todos.push(todo2BeAdded);
+	boards[0].todos.push(todo2BeAdded);
+   
+   saveData("boards",boards)
 
-    renderTodos(todos);
+   
+    renderTodos(boards[0].todos);
     $(this).parent().prev().val("");
     $(this).parents(".new-task").children("textarea").focus();
   });
@@ -140,9 +144,9 @@ $(document).ready(function () {
         listName: listTitle,
         todos: [],
       };
-      lists.push(list);
-      renderList(lists);
-      renderTodos(todos);
+      boards[0].lists.push(list);
+      renderList(boards[0].lists,boards[0].todos);
+      renderTodos(boards[0].todos);
     }
 
     $(this).parent().prev().val("");
@@ -220,4 +224,5 @@ $(document).ready(function () {
 
   </div>`;
   }
+  console.log(boards[0])
 });
