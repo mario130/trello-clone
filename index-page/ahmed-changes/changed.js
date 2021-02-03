@@ -1,194 +1,184 @@
 //data
-$(document).ready(function(){
-
-
-var todos = [
-  {
-    id: "1",
-    title: "todoName",
-    isDone: false,
-    listedIn: "doing",
-    team: ["2", "3", "4", "5"],
-    description: "",
-    dueDate: "20/11/2021",
-  },
-  {
-    id: "2",
-    title: "todoName",
-    isDone: false,
-    listedIn: "done",
-    team: ["2", "3", "4", "5"],
-    description: "",
-    dueDate: "20/11/2021",
-  },
-  {
-    id: "3",
-    title: "todoName",
-    isDone: false,
-    listedIn: "todos", //listName
-    team: ["2", "3", "4", "5"],
-    description: "",
-    dueDate: "20/11/2021",
-  },
-];
-var lists = [
-  { id: "1", listName: "doing", todos: [] },
-  { id: "2", listName: "todos", todos: [] },
-  { id: "3", listName: "done", todos: [] },
-];
-
-/*************************** Rendering ********************************* */
-
-function renderTodos(todos) {
-	deleteAllCards();
-  todos.forEach((todo) => {
-    $(`#${todo.listedIn}`)
-      .children(".card-bottom")
-      .before(
-        '<div class="list-cards"><a href="#" class="list-card">' +
-          todo.title +
-          "</a></div>"
-      );
-  });
-}
-//   renderTodos(todos);
-
-function renderList(lists) {
-	deleteAllLists()
-  lists.map((list) => {
-    todos.map((todo) => {
-      if (todo.listedIn === list.listName) {
-        list.todos.push(todo.id);
-      }
+$(document).ready(function () {
+  /******************** Data Store ******************** */
+  //initialize data
+  var boards = [
+	  {
+		  id: generateId(5),
+		  title: "board1",
+		  todos: [],
+		  lists: [
+			  { id: generateId(5), listName: "todos", todos: [] },
+			  { id: generateId(5), listName: "doing", todos: [] },
+			  { id: generateId(5), listName: "done", todos: [] },
+			],
+		},
+	];
+	saveData("boards", boards);
+	var todos = getData("boards")[0].todos || [];
+	var lists = getData("boards")[0].lists || [];
+  /*************************** Rendering ********************************* */
+  //render
+  function renderTodos(todos) {
+    deleteAllTodos();
+    todos.forEach((todo) => {
+      $(`#${todo.listedIn}`)
+        .children(".card-bottom")
+        .before(
+          '<div class="list-cards"><a href="#" class="list-card">' +
+            todo.title +
+            "</a></div>"
+        );
     });
-	// $(`#${list.listName}`).children("h2").text(list.listName);
-	//  var component = $(listComponent(list))
-	// $(document).ready(function(){
+  }
 
-    $("#listItems").append(listComponent(list));
+  //   renderTodos(todos);
+  function renderList(lists) {
+    deleteAllLists();
+    lists.map((list) => {
+      todos.map((todo) => {
+        if (todo.listedIn === list.listName) {
+          list.todos.push(todo);
+        }
+      });
 
-  });
-}
-renderList(lists)
+      $("#listItems").append(listComponent(list));
+    });
+  }
+  renderList(lists);
 
-/**************************** handling by events ************************************* */
+  /**************************** handling by events ************************************* */
 
-// click on NEW todo-btn
-/// الموضوع ده مهم جدا يا شباب
-$("#listItems").on("click", ".new-todo-btn",function (e) {
-	e.preventDefault()
-	$(this).parent().next(".new-task").slideToggle().children("textarea").focus();
-  $(this).parents(".card-wrapper").siblings().find(".new-task").slideUp();
-  $(this).slideUp();
-  $(this).parents(".card-wrapper").siblings().find(".new-todo-btn").show();
-});
+  // click on NEW todo-btn
 
-///// close todo
-$("#listItems").on("click",".cancel-todo",function () {
-  $(this).parents(".new-task").slideUp();
-
-  console.log($(this).parents(".card-bottom"))
-});
-
-//// press ENTER in keyboard
-var textareas = $("textarea");
-textareas.keydown(function (e) {
-  if (e.keyCode == 13) {
-    $(this).next().children("button").click();
+  $("#listItems").on("click", ".new-todo-btn", function (e) {
     e.preventDefault();
-  }
-});
-/// press ESC in keyboard
-$(document.body).keydown(function (e) {
-  if (e.keyCode == 27) {
-    $(".new-task").slideUp();
-  }
-});
+    $(this)
+      .parent()
+      .next(".new-task")
+      .slideToggle()
+      .children("textarea")
+      .focus();
+    $(this).parents(".card-wrapper").siblings().find(".new-task").slideUp();
 
-//click on add-card-btn and adding todo in
+    $(this).slideUp();
+    $(this).parents(".card-wrapper").siblings().find(".new-todo-btn").show();
+  });
 
-$("#listItems").on("click",".add-card-btn",function (ev) {
-	console.log($(this))
-  var todoName = $(this).parent().prev().val();
-  if (todoName.trim() === "") return;
+  ///// close todo
+  $("#listItems").on("click", ".cancel-todo", function () {
+    $(this).parents(".new-task").slideUp();
 
-  var listName = ev.target.dataset.list;
-  var todo2BeAdded = {
-    id: generateId(20),
-    title: todoName.toString(),
-    listedIn: listName,
-    isDone: false,
-    team: ["1", "2", "3"],
-    description: "",
-  };
+    $(this).parents(".new-task").siblings().eq(1).find(".new-todo-btn").show();
+  });
 
-  todos.push(todo2BeAdded);
-  
-  renderTodos(todos);
-  $(this).parent().prev().val("");
-  $(this).parents(".new-task").children("textarea").focus();
-});
+  //// press ENTER in keyboard
 
-// detecting clicks outside lists to close the card composer
-$(document.body).click(function (ev) {
-  if (
-    ev.target.classList.contains("container-fluid") ||
-    ev.target.classList.contains("row") ||
-    ev.target.classList.contains("col")
-  ) {
-    $("textarea").val("");
-    $(".new-task").slideUp();
-    $(".new-todo-btn").show();
+  $("#listItems").on("keydown", "textarea", function (e) {
+    if (e.keyCode == 13) {
+      $(this).next().children("button").click();
+      e.preventDefault();
+    }
+  });
+  /// press ESC in keyboard
+  $(document.body).keydown(function (e) {
+    if (e.keyCode == 27) {
+      $(".new-task").slideUp();
+      $(".new-todo-btn").show();
+      // close list tab
+      $(".new-list").slideUp();
+      $("#addAnotherList").show();
+    }
+  });
 
-    $("#addAnotherList").show();
-    $(".new-list").slideUp();
-  }
-});
-/***************************************************************** */
+  //click on add-card-btn and adding todo in
 
-// FOR RENDERING
-function deleteAllCards() {
-  $(".list-cards").remove();
-}
-function deleteAllLists() {
-$(".list").remove()
-}
+  $("#listItems").on("click", ".add-card-btn", function (ev) {
+    var todoName = $(this).parent().prev().val();
+    if (todoName.trim() === "") return;
 
-// logout logic
-function logOut() {
-  localStorage.removeItem("activeUserID");
-  location.assign("/log-in/login.html");
-}
-/*************          changes      ***************/
-
-$("#addlistBtn").click(function () {
-  //create list object and push
-  var listTitle = $(this).parent().prev().val();
-  if (listTitle) {
-    var list = {
-      id: "1",
-      listName: listTitle,
-      todos: [],
+    var listName = ev.target.dataset.list;
+    var todo2BeAdded = {
+      id: generateId(10),
+      title: todoName,
+      listedIn: listName,
+      teamMembers: [],
+      description: "",
+      isDone: false,
     };
-    lists.push(list);
-	console.log(lists)
-	renderList(lists);
-	renderTodos(todos)
+
+	todos.push(todo2BeAdded);
+
+    renderTodos(todos);
+    $(this).parent().prev().val("");
+    $(this).parents(".new-task").children("textarea").focus();
+  });
+
+  // detecting clicks outside lists to close the card composer
+  $(document.body).click(function (ev) {
+    if (
+      ev.target.classList.contains("container-fluid") ||
+      ev.target.classList.contains("row") ||
+      ev.target.classList.contains("col")
+    ) {
+      $("textarea").val("");
+      $(".new-task").slideUp();
+      $(".new-todo-btn").show();
+
+      $("#addAnotherList").show();
+      $(".new-list").slideUp();
+    }
+  });
+
+  //adding another list
+  $("#addlistBtn").click(function () {
+    //create list object and push
+    var listTitle = $(this).parent().prev().val();
+    if (listTitle) {
+      var list = {
+        id: generateId(5),
+        listName: listTitle,
+        todos: [],
+      };
+      lists.push(list);
+      renderList(lists);
+      renderTodos(todos);
+    }
+
+    $(this).parent().prev().val("");
+  });
+
+  //showing edit list item
+  $("#addAnotherList").click(function () {
+    $(this).next().slideToggle();
+    $(this).hide();
+  });
+  /***************************************************************** */
+
+  // FOR RENDERING
+  function deleteAllTodos() {
+    $(".list-cards").remove();
   }
+  function deleteAllLists() {
+    $(".list").remove();
+  }
+  function saveData(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+  function getData(key) {
+   var data = localStorage.getItem(key);
+    return JSON.parse(data);
+  }
+  // logout logic
+  function logOut() {
+    localStorage.removeItem("activeUserID");
+    location.assign("/log-in/login.html");
+  }
+  /*************          changes      ***************/
 
-  $(this).parent().prev().val("");
-});
-
-//showing edit list input
-$("#addAnotherList").click(function () {
-  $(this).next().slideToggle();
-  $(this).hide();
-});
-
-
-/******************* conponents ******************************* */
-function listComponent (list){
-	return `<div class="card-wrapper mt-2 ml-0 mr-2 list">
+  /******************* conponents ******************************* */
+  function listComponent(list) {
+    return `<div class="card-wrapper mt-2 ml-0 mr-2 list">
   
 	<div class="card" id="${list.listName}">
 	  <div class="card-header mb-1">
@@ -228,6 +218,6 @@ function listComponent (list){
 	</div>
 
 
-  </div>`
-}
-})
+  </div>`;
+  }
+});
