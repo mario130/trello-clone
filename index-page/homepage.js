@@ -73,25 +73,25 @@ function makeCards() {
 		}
 	});
 
-	receivedBoard.lists.forEach(function (list) {
-		if (list.listName === "Todos") {
-			list.todos.forEach(function (todo) {
-				lists.Todos.push(todo.title);
-			});
-		}
+	// receivedBoard.lists.forEach(function (list) {
+	// 	if (list.listName === "Todos") {
+	// 		list.todos.forEach(function (todo) {
+	// 			lists.Todos.push(todo.title);
+	// 		});
+	// 	}
 
-		if (list.listName === "Doing") {
-			list.todos.forEach(function (todo) {
-				lists.Doing.push(todo.title);
-			});
-		}
+	// 	if (list.listName === "Doing") {
+	// 		list.todos.forEach(function (todo) {
+	// 			lists.Doing.push(todo.title);
+	// 		});
+	// 	}
 
-		if (list.listName === "Done") {
-			list.todos.forEach(function (todo) {
-				lists.Done.push(todo.title);
-			});
-		}
-	});
+	// 	if (list.listName === "Done") {
+	// 		list.todos.forEach(function (todo) {
+	// 			lists.Done.push(todo.title);
+	// 		});
+	// 	}
+	// });
 
 	// start rendering for each list
 	lists.Todos.forEach(function (todo) {
