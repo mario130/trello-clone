@@ -11,7 +11,7 @@ function createBasicBoard(){
    {
      id: generateId(5),
      title: "board1",
-     boardMembers = [getData('activeUserID')],
+     boardMembers: [getData('activeUserID')],
      todos:[],
      lists: [
        { id: generateId(5), listName: "todos", todos: [] },
@@ -28,26 +28,21 @@ function createBasicBoard(){
   function renderTodos(todos) {
     deleteAllTodos();
     todos.forEach((todo) => {
-      $(`#${todo.listedIn}`)
+      $(`#${properId(todo.listedIn)}`)
         .children(".card-bottom")
         .before(
-          '<div class="list-cards"><a href="#" class="list-card">' +
+          '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card">' +
             todo.title +
             "</a></div>"
         );
     });
+    makeTodosDraggable()
   }
 
   //   renderTodos(todos);
   function renderList(lists,todos) {
     deleteAllLists();
-    lists.map((list) => {
-      todos.map((todo) => {
-        if (todo.listedIn === list.listName) {
-          list.todos.push(todo);
-        }
-      });
-
+    lists.forEach((list) => {
       $("#listItems").append(listComponent(list));
     });
     renderTodos(todos)
@@ -117,7 +112,11 @@ function createBasicBoard(){
     };
 
 	boards[0].todos.push(todo2BeAdded);
-   
+  boards[0].lists.forEach(list=>{
+    if(list.listName === todo2BeAdded.listedIn){
+      list.todos.push(todo2BeAdded)
+    }
+  })
    saveData("boards",boards)
 
   //  console.log(boards[0].todos);
@@ -148,12 +147,24 @@ function createBasicBoard(){
   $("#addlistBtn").click(function () {
     //create list object and push
     var listTitle = $(this).parent().prev().val();
+    var isAlready=false
     if (listTitle) {
+      boards[0].lists.forEach(list=>{
+        if(list.listName === listTitle) {
+          isAlready =true
+        }
+      })
+      if(isAlready) {
+        alert("this List is Alreay Created")
+        $(this).parent().prev().val("")
+        return;
+      };
       var list = {
         id: generateId(5),
         listName: listTitle,
         todos: [],
       };
+      
       boards[0].lists.push(list);
       saveData('boards', boards)
       renderList(boards[0].lists,boards[0].todos);
@@ -206,6 +217,34 @@ function createBasicBoard(){
     $("#addAnotherList").fadeIn();
   })
   /***************************************************************** */
+  
+  // Drag & drop logic
+  function makeTodosDraggable(){
+
+    $(".list-cards").draggable({
+      revert: 'invalid',
+      start: function(ev, ui){
+        $($(ev.target).parents('.card')[0]).addClass('todo-leave')
+      }
+    })
+    $(".card").droppable({
+      accept:'.list-cards',
+      classes: {
+        'ui-droppable-hover': 'todo-enter'
+      },
+      drop: function(ev, ui){
+        
+        boards[0].todos.forEach(function(todo){
+          if (todo.id === ui.draggable[0].getAttribute('id')){
+            todo.listedIn = ev.target.id;
+            saveData('boards', boards)
+            renderList(boards[0].lists,boards[0].todos);
+          }
+        })
+      }
+    })
+  }
+  /***************************************************************** */
 
   // FOR RENDERING
   function deleteAllTodos() {
@@ -245,7 +284,7 @@ function createBasicBoard(){
   function listComponent(list) {
     return `<div class="card-wrapper mt-2 ml-0 mr-2 list">
   
-	<div class="card" id="${list.listName}">
+	<div class="card" id="${properId(list.listName)}">
 	  <div class="card-header mb-1">
 		<h2>${list.listName}</h2>
 		<button onclick="deleteList(this)" class="delete-list">

@@ -127,6 +127,10 @@
 	flex-direction: column;
 	max-height: 100%;
 	white-space: normal;
+	transition: all .3s;
+}
+.card a {
+	transition: all .3s;
 }
 .card-header {
 	position: relative;
@@ -150,6 +154,8 @@
 }
 .card a:hover {
 	text-decoration: none;
+	background-color: whitesmoke;
+	color: black;
 }
 .list-cards {
 	flex: 1 1 auto;
@@ -277,4 +283,14 @@ background-color: #ffffff52;
 	margin-bottom: 4px;
 	position: relative;
 	top: 3px;
+}
+
+.card-bottom {
+	transition: all 0.3s;
+}
+.todo-enter .card-bottom {
+	margin-top: 38px;
+}
+.todo-leave .card-bottom{
+	margin-top: 0;
 }
