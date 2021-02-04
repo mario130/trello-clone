@@ -1,6 +1,7 @@
 //data
   /******************** Data Store ******************** */
   //initialize data
+var selectedBoard = selectedBoard ? selectedBoard : "Board 1";
 var boards = getData("boards") 
 if (!boards){
   createBasicBoard()
@@ -31,12 +32,13 @@ function createBasicBoard(){
       $(`#${properId(todo.listedIn)}`)
         .children(".card-bottom")
         .before(
-          '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card">' +
+          '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card" data-id="'+todo.id+'">' +
             todo.title +
             "</a></div>"
         );
     });
     makeTodosDraggable()
+    activateMmodals()
   }
 
   //   renderTodos(todos);
@@ -48,6 +50,7 @@ function createBasicBoard(){
     renderTodos(todos)
   }
   renderList(boards[0].lists,boards[0].todos);
+  $('.currentBoardName').html(selectedBoard)
 
   /**************************** handling by events ************************************* */
 
@@ -241,6 +244,55 @@ function createBasicBoard(){
             renderList(boards[0].lists,boards[0].todos);
           }
         })
+      }
+    })
+  }
+  /***************************************************************** */
+
+  var activeModalTodoId;
+  // modal window
+  function activateMmodals(){
+
+    // activate modal on press
+    $('.list-card').click(function(){
+      $('.modal-title').html(this.textContent)
+  
+      // loop for the chosen todo to get its info
+      var todos = boards[0].todos
+      var chosenId = $(this)[0].getAttribute('data-id')
+      activeModalTodoId = chosenId
+      var chosenTodo = []; 
+      todos.forEach(todo => {
+        if (todo.id === chosenId){
+          chosenTodo.push(todo)
+        }
+      })
+
+      // fill todo description
+      $('#desc').html(chosenTodo[0].description)
+
+      // get current user full name
+      var activeUserId = getData('activeUserID');
+      var users = getData('users')
+      var chosenUser = users.forEach(user => {
+        console.log(user.id);
+        console.log(activeUserId);
+        if (user.id === activeUserId){
+          $('#modal-members').html(user.fullName)
+        }
+      })
+      console.log(chosenUser);
+  
+      $('#myModal').modal('show')
+    })
+  }
+
+  function saveDescription(ev){
+    boards[0].todos.map(todo => {
+      if (todo.id === activeModalTodoId){
+        todo.description = $($(ev).parent().prev()[0]).find('#desc').val()
+        saveData('boards', boards)
+        renderTodos(boards[0].todos);
       }
     })
   }
