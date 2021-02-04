@@ -15,6 +15,7 @@
 	border: none;
 	text-decoration: none;
 	align-items: center;
+	/* background-color: hsla(0, 0%, 100%, 0.3); */
 	background-color: rgba(255, 255, 255, 0.3);
 	box-shadow: none;
 	color: #fff;
@@ -28,9 +29,8 @@
 }
 .bar-1-btn:hover,
 .bar-2-btn:hover{
-	background-color: rgba(255, 255, 255, 0.4);;
+	background-color: rgba(255, 255, 255, 0.4);
 }
-
 .bar-2-btn {
 	margin-bottom: 5px;
 }
@@ -114,7 +114,23 @@
 	fill: yellow;
 }
 
+/* for horizontal navigation later */
+/* #board{
+	white-space: nowrap;
+} */
+
 /* CARDS */
+#listItems{
+	display: inline-block
+}
+.delete-list{
+	background: rgba(0,0,0,0);
+	border: none;
+}
+.delete-list svg {
+	width: 18px;
+	height: 18px;
+}
 .card-wrapper {
 	width: 272px;
 	height: 100%;
@@ -129,6 +145,7 @@
 	flex-direction: column;
 	max-height: 100%;
 	white-space: normal;
+	transition: all .3s;
 }
 .card-headerr {
 	position: relative;
@@ -137,6 +154,21 @@
 	justify-content: space-between;
 	padding: 10px 8px;
 	position: relative;
+}
+.card a {
+	transition: all .3s;
+}
+.card-header {
+	position: relative;
+	min-height: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 8px;
+	position: relative;
+}
+.card-header h2 {
+	margin-bottom: 0;
 }
 
 .card h2 {
@@ -148,6 +180,8 @@
 }
 .card a:hover {
 	text-decoration: none;
+	background-color: whitesmoke;
+	color: black;
 }
 .list-cards {
 	flex: 1 1 auto;
@@ -246,4 +280,43 @@
 		max-width: 95% !important;
 		width: 100%;
 	}
+}
+#addListBtn:hover{
+background-color: #ffffff52;
+}
+.add-new-list {
+	width: 100%;
+}
+.add-new-list svg {
+	position: relative;
+	bottom: 2px;
+}
+
+.new-list {
+	display: none;
+}
+
+.add-list-btn {
+	background-color: #5aac44;
+	width: auto;
+	padding: 0 15px;
+	margin: 5px 10px;
+	font-size: 14px;
+}
+.add-list-actions svg {
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 4px;
+	position: relative;
+	top: 3px;
+}
+
+.card-bottom {
+	transition: all 0.3s;
+}
+.todo-enter .card-bottom {
+	margin-top: 38px;
+}
+.todo-leave .card-bottom{
+	margin-top: 0;
 }
