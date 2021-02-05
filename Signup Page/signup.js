@@ -65,7 +65,9 @@ $(document).ready(function () {
             email,
             fullName,
             password,
+            userName: generateUserName(fullName)
           };
+          console.log( user)
           //saving in localstoragw
           const currentUsers = JSON.parse(localStorage.getItem("users")) || [];
           const newUsers = [...currentUsers, user];
@@ -76,7 +78,7 @@ $(document).ready(function () {
           $("#fullName").val("");
           $("#password").val("");
           //routing to login Page
-          window.location.replace("../index-page/homepage.html");
+          // window.location.replace("../index-page/homepage.html");
         } else {
           $("#errorMsg")
             .fadeIn("slow")
@@ -214,6 +216,9 @@ window.onload = function () {
   }
 };
 
+function generateUserName(fullName){
+  return  fullName.split(" ").join("_") + Math.ceil(Math.random()*1000)
+}
 /************************* */
 // function validateEmail( anyUsers) {
 //   let isValid= false
