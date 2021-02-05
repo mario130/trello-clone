@@ -6,6 +6,7 @@ let activeUserID= JSON.parse(localStorage.getItem("activeUserID"))
 const activeUser = allUsers.filter(user=>{
     return user.id === activeUserID
 })
+$('#welcome-message').text(`👋 Welcome, ${activeUser[0].fullName.split(' ')[0]}`)
 
 /******************* Events **************************** */
 $("#haveTeam").click(function () {
