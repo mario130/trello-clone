@@ -1,15 +1,12 @@
-const teams = [
-  {
-    id: "dffs1",
-    teamName: "jquery",
-    category: "education",
-    teamMembers: [],
-  },
-];
+const teams = JSON.parse(localStorage.getItem("teams")) ||[];
 
 let getTeamMembers = [];
 const allUsers = JSON.parse(localStorage.getItem("users"));
-const getTeams = JSON.parse(localStorage.getItem("teams"));
+let activeUserID= JSON.parse(localStorage.getItem("activeUserID"))
+const activeUser = allUsers.filter(user=>{
+    return user.id === activeUserID
+})
+
 /******************* Events **************************** */
 $("#haveTeam").click(function () {
   $("#createTeam").slideToggle();
@@ -42,7 +39,7 @@ $("#createTeam").on("submit", function (e) {
       id: generateId(5),
       teamName: teamName,
       category: category,
-      teamMembers: [...getTeamMembers],
+      teamMembers: [...getTeamMembers,activeUser[0].userName],
     };
     teams.push(newTeam);
     localStorage.setItem("teams",JSON.stringify(teams))
@@ -67,7 +64,7 @@ $(function () {
   });
 });
 /************************************************************** */
-const teamNames = getTeams.map((team) => {
+const teamNames = teams.map((team) => {
     return  team.teamName;
   });
   console.log(teamNames)
@@ -81,18 +78,35 @@ $("#chooseTeam").on("submit", function(e){
     e.preventDefault()
     
    let value =  $("#chooseTeamNames").val()
-  let isExist = getTeams.some(team=>{
+  let isExist = teams.some(team=>{
       return team.teamName === value
   })
   if(value &&isExist) {
     $("#isExistTeam").fadeOut()
     $("#isExistTeam").text("")
-      console.log("sent")
+  let teamChosen = teams.filter((team=>{
+        return team.teamName === value
+    }))
+    console.log(activeUser[0])
+   let isParticipate = teamChosen[0].teamMembers.some(member=>{
+       console.log(member)
+        return  member === activeUser[0].userName
+    })
+        if(isParticipate){
+ $("#isExistTeam").fadeOut()
+$("#isExistTeam").text("")
+
+        } else{
+            $("#isExistTeam").fadeIn()
+            $("#isExistTeam").text("you are not a participant in that team  ")
+        }
   } else {
     $("#isExistTeam").fadeIn()
       $("#isExistTeam").text("Not exist ")
   }
 })
+
+
 /************** functions************************** */
 function onCommaPress(input, textBadge, e) {
   if (e.keyCode === 188) {
