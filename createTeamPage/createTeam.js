@@ -31,22 +31,35 @@ $("#createTeam").on("submit", function (e) {
   e.preventDefault();
   const teamName = $("#teamName").val();
   const category = $("#chooseCategory").val();
-  if (teamName && category !== "notChoice" && getTeamMembers.length !== 0) {
-    $("#required").fadeOut()
-    $("#required").text("")
+  if (teamName && category !== "notChoice") {
+    var teamAlreadyExists = false;
+    for (team of teamNames) {
+      if (teamName === team) {
+        alert('There\'s a team with this name!')
+        teamAlreadyExists = true;
+      } 
+    }
+    if (!teamAlreadyExists){
 
-    let newTeam = {
-      id: generateId(5),
-      teamName: teamName,
-      category: category,
-      teamMembers: [...getTeamMembers,activeUser[0].userName],
-    };
-    teams.push(newTeam);
-    localStorage.setItem("teams",JSON.stringify(teams))
-    console.log("sent ",teams)
-    $("#teamName").val("");
-    $("#chooseCategory").val("");
-    $("#showUsers").text("");
+      $("#required").fadeOut()
+      $("#required").text("")
+  
+      let newTeam = {
+        id: generateId(5),
+        teamName: teamName,
+        category: category,
+        teamMembers:  [activeUser[0].userName,...getTeamMembers],
+      };
+      teams.push(newTeam);
+      localStorage.setItem("teams",JSON.stringify(teams))
+      console.log("sent ",teams)
+      $("#teamName").val("");
+      $("#chooseCategory").val("");
+      $("#showUsers").text("");
+      document.location.href = "../index-page/homepage.html";
+    } else {
+      alert(`Team ${teamName} already exist`)
+    }
   } else {
       $("#required").text("Please fill all required fields")
       $("#required").fadeIn()
@@ -54,20 +67,30 @@ $("#createTeam").on("submit", function (e) {
 });
 
 // auto complete jquery UI
-const userNames = allUsers.map((user) => {
-  return "@" + user.userName;
+const usersExceptCreator = allUsers.filter(user => user.userName !== activeUser[0].userName)
+const userNames = usersExceptCreator.map((user) => {
+    if (user.userName !== activeUser[0].userName){
+      return "@" + user.userName;
+    }
 });
-$(function () {
-  var usersemail = [...userNames];
-  $("#addTeamMembers").autocomplete({
-    source: usersemail,
+if (userNames){
+  $(function () {
+    var usersemail = [...userNames];
+    $("#addTeamMembers").autocomplete({
+      source: usersemail,
+    });
   });
-});
+}
+
+/************************************************************** */
+// get current badges to avoid duplicates
+var badges = document.getElementsByClassName('badge')
+var badgeNames = [activeUser[0].userName]
+
 /************************************************************** */
 const teamNames = teams.map((team) => {
     return  team.teamName;
   });
-  console.log(teamNames)
 $(function () {
 
     $("#chooseTeamNames").autocomplete({
@@ -114,40 +137,23 @@ function onCommaPress(input, textBadge, e) {
     if (value) {
       if (value.startsWith("@")) {
         userName = value.slice(1, -1);
-        let isUserExist = allUsers.some((elem) => {
-          return elem.userName === userName;
-        });
-        if (isUserExist) {
-          $("#userError").fadeOut();
-          $("#userError").text("");
-          textBadge.text(userName);
-        } else {
-          $("#userError").fadeIn();
-          $("#userError").text("this user doesn't exist");
-        }
+        addToListWithAt(userName, textBadge) // with @
       } else {
         userName = value.slice(0, -1);
-        let isUserExist = allUsers.some((elem) => {
-          return elem.userName === userName;
-        });
-
-        if (isUserExist) {
-          $("#userError").fadeOut();
-          $("#userError").text("");
-          textBadge.text(userName);
-        } else {
-          $("#userError").fadeIn();
-          $("#userError").text("this user doesn't exist");
-        }
+        addToListWithoutAt(textBadge)
       }
-      //push users in array
-      getTeamMembers.push(userName);
-
-      $("#showUsers").append(textBadge);
-      input.val("");
+      completeAddition(input,textBadge)
+      
     }
   }
 }
+
+// push team leader
+let teamLeaderSpan = $(`<span class="badge bg-secondary me-2"></span>`)
+teamLeaderSpan.text(activeUser[0].userName)
+$("#showUsers").append(teamLeaderSpan);
+
+
 function onEnterPress(input, textBadge, e) {
     e.preventDefault()
   if (e.keyCode === 13) {
@@ -155,37 +161,56 @@ function onEnterPress(input, textBadge, e) {
     if (value) {
       if (value.startsWith("@")) {
         userName = value.slice(1);
-        let isUserExist = allUsers.some((elem) => {
-          return elem.userName === userName;
-        });
-        if (isUserExist) {
-          $("#userError").fadeOut();
-          $("#userError").text("");
-          textBadge.text(userName);
-        } else {
-          $("#userError").fadeIn();
-          $("#userError").text("this user doesn't exist");
-        }
+        addToListWithAt(userName, textBadge) // with @
       } else {
         userName = value;
-        let isUserExist = allUsers.some((elem) => {
-          return elem.userName === userName;
-        });
-
-        if (isUserExist) {
-          $("#userError").fadeOut();
-          $("#userError").text("");
-          textBadge.text(userName);
-        } else {
-          $("#userError").fadeIn();
-          $("#userError").text("this user doesn't exist");
-        }
+        addToListWithoutAt(textBadge)
       }
-      //push users in array
-
-      getTeamMembers.push(userName);
-      $("#showUsers").append(textBadge);
-      input.val("");
+      completeAddition(input,textBadge)
+      
     }
+  }
+}
+function addToListWithAt(userName, textBadge){
+  let isUserExist = allUsers.some((elem) => {
+    return elem.userName === userName;
+  });
+  if (isUserExist) {
+    $("#userError").fadeOut();
+    $("#userError").text("");
+    textBadge.text(userName);
+  } else {
+    $("#userError").fadeIn();
+    $("#userError").text("this user doesn't exist");
+  }
+}
+function addToListWithoutAt(textBadge){
+  let isUserExist = allUsers.some((elem) => {
+    return elem.userName === userName;
+  });
+
+  if (isUserExist) {
+    $("#userError").fadeOut();
+    $("#userError").text("");
+    textBadge.text(userName);
+  } else {
+    $("#userError").fadeIn();
+    $("#userError").text("this user doesn't exist");
+  }
+}
+function completeAddition(input, textBadge){
+  if (badgeNames.some(badge => badge === userName)){
+    alert('This user is already in your team!')
+    $('#addTeamMembers').val('')
+  } else {
+
+    //push users in array
+    getTeamMembers.push(userName);
+    
+    $("#showUsers").append(textBadge);
+    input.val("");
+
+    badgeNames.push(userName)
+    console.log(badgeNames);
   }
 }
