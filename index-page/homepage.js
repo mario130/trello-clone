@@ -2,7 +2,12 @@
 /******************** Data Store ******************** */
 //initialize data
 var selectedBoard = selectedBoard ? selectedBoard : "Board 1";
-var boards = getData("boards") 
+var boards = getData("boards")
+var currentActiveBoardIdx = getData('currentActiveBoardIdx')
+if (!currentActiveBoardIdx){
+  var currentActiveBoardIdx;
+}
+
 if (!boards){
   createBasicBoard()
 }
@@ -11,7 +16,7 @@ function createBasicBoard(){
   [
     {
       id: generateId(5),
-      title: "board1",
+      title: "Board 1",
       boardMembers: [getData('activeUserID')],
       todos:[],
       lists: [
@@ -19,10 +24,24 @@ function createBasicBoard(){
         { id: generateId(5), listName: "doing", todos: [] },
         { id: generateId(5), listName: "done", todos: [] },
       ],
+      creatorID: getData('activeUserID'),
+      bgColor: '#1f79bf'
     },
   ];
   saveData('boards', boards)
+  currentActiveBoardIdx = 0;
+  saveData('currentActiveBoardIdx', currentActiveBoardIdx);
 }
+
+// initialize boards list
+function initializeBoardsList(){
+  $('.boardLink').parent().remove()
+  for (let i = 0; i < boards.length; i++){
+    let boardLink = $(`<div class="slid-board"><button class="boardLink" onclick="switchBoard(${i})">${boards[i].title}</button></div>`);
+    $('.create-new-board').before(boardLink)
+  }
+}
+initializeBoardsList()
 
   /*************************** Rendering ********************************* */
   //render
@@ -49,7 +68,11 @@ function createBasicBoard(){
     });
     renderTodos(todos)
   }
-  renderList(boards[0].lists,boards[0].todos);
+  if (!currentActiveBoardIdx) {
+    currentActiveBoardIdx = 0;
+    saveData('currentActiveBoardIdx', currentActiveBoardIdx);
+  }
+  renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
   $('.currentBoardName').html(selectedBoard)
 
   /**************************** handling by events ************************************* */
@@ -95,6 +118,8 @@ function createBasicBoard(){
       // close list tab
       $(".new-list").hide();
       $("#addAnotherList").fadeIn();
+      $("#board-modai").fadeOut();
+      $("#slid-menu").slideUp();
     }
   });
 
@@ -114,8 +139,8 @@ function createBasicBoard(){
       isDone: false,
     };
 
-  boards[0].todos.push(todo2BeAdded);
-  boards[0].lists.forEach(list=>{
+  boards[currentActiveBoardIdx].todos.push(todo2BeAdded);
+  boards[currentActiveBoardIdx].lists.forEach(list=>{
     if(list.listName === todo2BeAdded.listedIn){
       list.todos.push(todo2BeAdded)
     }
@@ -123,7 +148,7 @@ function createBasicBoard(){
     saveData("boards",boards)
 
   //  console.log(boards[0].todos);
-    renderTodos(boards[0].todos);
+    renderTodos(boards[currentActiveBoardIdx].todos);
     $(this).parent().prev().val("");
     $(this).parents(".new-task").children("textarea").focus();
   });
@@ -152,7 +177,7 @@ function createBasicBoard(){
     var listTitle = $(this).parent().prev().val();
     var isAlready=false
     if (listTitle) {
-      boards[0].lists.forEach(list=>{
+      boards[currentActiveBoardIdx].lists.forEach(list=>{
         if(list.listName === listTitle) {
           isAlready =true
         }
@@ -168,10 +193,10 @@ function createBasicBoard(){
         todos: [],
       };
       
-      boards[0].lists.push(list);
+      boards[currentActiveBoardIdx].lists.push(list);
       saveData('boards', boards)
-      renderList(boards[0].lists,boards[0].todos);
-      renderTodos(boards[0].todos);
+      renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
+      renderTodos(boards[currentActiveBoardIdx].todos);
     }
 
     $(this).parent().prev().val("");
@@ -185,19 +210,19 @@ function createBasicBoard(){
     if (ans){
 
       var listNameToBeDeleted = $(that).prev().html()
-      for(let i = 0; i < boards[0].lists.length; i++){
-        if (boards[0].lists[i].listName === listNameToBeDeleted){
+      for(let i = 0; i < boards[currentActiveBoardIdx].lists.length; i++){
+        if (boards[currentActiveBoardIdx].lists[i].listName === listNameToBeDeleted){
           var listIdxToBeDeleted = i
           // console.log(boards[0].lists[i].listName);
         }
       }
       if (listIdxToBeDeleted > -1) {
         // console.log('present', listIdxToBeDeleted);
-        boards[0].lists.splice(listIdxToBeDeleted, 1)
+        boards[currentActiveBoardIdx].lists.splice(listIdxToBeDeleted, 1)
         // console.log(boards);
         saveData('boards', boards)
-        renderList(boards[0].lists,boards[0].todos);
-        renderTodos(boards[0].todos);
+        renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
+        renderTodos(boards[currentActiveBoardIdx].todos);
         // console.log('deleted');
       }
     }
@@ -242,11 +267,11 @@ function createBasicBoard(){
       },
       drop: function(ev, ui){
         
-        boards[0].todos.forEach(function(todo){
+        boards[currentActiveBoardIdx].todos.forEach(function(todo){
           if (todo.id === ui.draggable[0].getAttribute('id')){
             todo.listedIn = ev.target.id;
             saveData('boards', boards)
-            renderList(boards[0].lists,boards[0].todos);
+            renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
           }
         })
       }
@@ -263,8 +288,8 @@ function createBasicBoard(){
       $('.modal-title').html(this.textContent)
   
       // loop for the chosen todo to get its info
-      var todos = boards[0].todos
-      var chosenId = $(this)[0].getAttribute('data-id')
+      var todos = boards[currentActiveBoardIdx].todos
+      var chosenId = $(this)[currentActiveBoardIdx].getAttribute('data-id')
       activeModalTodoId = chosenId
       var chosenTodo = []; 
       todos.forEach(todo => {
@@ -298,7 +323,7 @@ function createBasicBoard(){
       if (todo.id === activeModalTodoId){
         todo.description = $($(ev).parent().prev()[0]).find('#desc').val()
         saveData('boards', boards)
-        renderTodos(boards[0].todos);
+        renderTodos(boards[currentActiveBoardIdx].todos);
       }
     })
   }
@@ -328,6 +353,7 @@ function createBasicBoard(){
     localStorage.removeItem('boards');
     
   }
+  // TODO
   function getBasicBoard(){
     boards[0].lists = []
     boards[0].todos = []
@@ -335,6 +361,7 @@ function createBasicBoard(){
     saveData('boards', boards)
     renderList(boards[0].lists,boards[0].todos);
     renderTodos(boards[0].todos);
+    initializeBoardsList()
   }
   /*************          changes      ***************/
 
@@ -382,7 +409,6 @@ function createBasicBoard(){
 
   </div>`;
   }
-  console.log(boards[0])
   
 
   $("#open-slid-menu").click(function () {
@@ -393,45 +419,54 @@ function createBasicBoard(){
   })
   $("#open-board-modail").click(function () {
     $("#board-modai").css("display","flex");
+    $('#titlenewbord').focus()
   })
   $(".close-modial").click(function () {
-    $("#board-modai").css("display","none");
+    $("#board-modai").fadeOut();
   })
   var lisColor = $(".board-style li");
   lisColor.click(function(){
-    console.log($(this).attr("data-color"));
+    // console.log($(this).attr("data-color"));
     $(".board-title").css("background-color",$(this).attr("data-color"))
   })
   
   $("#add-board").click(function(){
-    var newBosrdTitle = $("#titlenewbord").val();
-    if(newBosrdTitle){
-      $("#board-name").text(newBosrdTitle)
-      console.log(newBosrdTitle)
+    var newBoardTitle = $("#titlenewbord").val();
+    if(newBoardTitle){
+      $("#board-name").text(newBoardTitle)
+      console.log(newBoardTitle)
       $("#titlenewbord").val("");
       $("#board-modai").css("display","none");
       var newboard = 
     {
       id: generateId(5),
-      title: newBosrdTitle,
+      title: newBoardTitle,
       todos:[],
       lists: [
         { id: generateId(5), listName: "todos", todos: [] },
         { id: generateId(5), listName: "doing", todos: [] },
         { id: generateId(5), listName: "done", todos: [] },
       ],
+      creatorID: getData('activeUserID'),
+      bgColor: $(".board-title").css("background-color")
     };
     boards.push(newboard)
     saveData('boards', boards)
-    console.log($(".board-title").css("background-color"))
+    renderList(boards[boards.length-1].lists,boards[boards.length-1].todos);
+    renderTodos(boards[boards.length-1].todos)
+    currentActiveBoardIdx = boards.length-1
+    saveData('currentActiveBoardIdx', currentActiveBoardIdx);
+    
+    $('#slid-menu').slideUp()
+    initializeBoardsList()
+    
+    } else {
+      alert('Please enter the board title')
     }
   })
   var userImg = $(".userImg");
 
 var users = JSON.parse(localStorage.getItem("users"));
-
-console.log(users);
-
 var activeUser = JSON.parse(localStorage.getItem("activeUserID"));
 
 // console.log(activeUser);
@@ -439,4 +474,12 @@ var activeUser = JSON.parse(localStorage.getItem("activeUserID"));
 for (let i = 0; i< users.length; i++){
 	if (users[i].id == activeUser)
 	userImg.text(users[i].initial);
+}
+
+function switchBoard(idx){
+  currentActiveBoardIdx = idx;
+  saveData('currentActiveBoardIdx', currentActiveBoardIdx);
+  renderList(boards[idx].lists,boards[idx].todos);
+  renderTodos(boards[idx].todos)
+  $('#slid-menu').slideUp();
 }
