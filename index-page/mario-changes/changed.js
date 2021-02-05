@@ -222,12 +222,17 @@ function createBasicBoard(){
   /***************************************************************** */
   
   // Drag & drop logic
+  var draggingInProgress = false;
   function makeTodosDraggable(){
 
     $(".list-cards").draggable({
       revert: 'invalid',
       start: function(ev, ui){
         $($(ev.target).parents('.card')[0]).addClass('todo-leave')
+        draggingInProgress = true;
+      },
+      stop: function(){
+        draggingInProgress = false
       }
     })
     $(".card").droppable({
@@ -275,15 +280,16 @@ function createBasicBoard(){
       var activeUserId = getData('activeUserID');
       var users = getData('users')
       var chosenUser = users.forEach(user => {
-        console.log(user.id);
-        console.log(activeUserId);
+        // console.log(user.id);
+        // console.log(activeUserId);
         if (user.id === activeUserId){
           $('#modal-members').html(user.fullName)
         }
       })
-      console.log(chosenUser);
-  
-      $('#myModal').modal('show')
+      // console.log(chosenUser);
+      if (!draggingInProgress){
+        $('#myModal').modal('show')
+      }
     })
   }
 

@@ -1,6 +1,6 @@
 //data
-  /******************** Data Store ******************** */
-  //initialize data
+/******************** Data Store ******************** */
+//initialize data
 var selectedBoard = selectedBoard ? selectedBoard : "Board 1";
 var boards = getData("boards") 
 if (!boards){
@@ -9,19 +9,19 @@ if (!boards){
 function createBasicBoard(){
   boards = 
   [
-   {
-     id: generateId(5),
-     title: "board1",
-     boardMembers: [getData('activeUserID')],
-     todos:[],
-     lists: [
-       { id: generateId(5), listName: "todos", todos: [] },
-       { id: generateId(5), listName: "doing", todos: [] },
-       { id: generateId(5), listName: "done", todos: [] },
-     ],
-   },
- ];
- saveData('boards', boards)
+    {
+      id: generateId(5),
+      title: "board1",
+      boardMembers: [getData('activeUserID')],
+      todos:[],
+      lists: [
+        { id: generateId(5), listName: "todos", todos: [] },
+        { id: generateId(5), listName: "doing", todos: [] },
+        { id: generateId(5), listName: "done", todos: [] },
+      ],
+    },
+  ];
+  saveData('boards', boards)
 }
 
   /*************************** Rendering ********************************* */
@@ -114,13 +114,13 @@ function createBasicBoard(){
       isDone: false,
     };
 
-	boards[0].todos.push(todo2BeAdded);
+  boards[0].todos.push(todo2BeAdded);
   boards[0].lists.forEach(list=>{
     if(list.listName === todo2BeAdded.listedIn){
       list.todos.push(todo2BeAdded)
     }
   })
-   saveData("boards",boards)
+    saveData("boards",boards)
 
   //  console.log(boards[0].todos);
     renderTodos(boards[0].todos);
@@ -222,12 +222,17 @@ function createBasicBoard(){
   /***************************************************************** */
   
   // Drag & drop logic
+  var draggingInProgress = false;
   function makeTodosDraggable(){
 
     $(".list-cards").draggable({
       revert: 'invalid',
       start: function(ev, ui){
         $($(ev.target).parents('.card')[0]).addClass('todo-leave')
+        draggingInProgress = true;
+      },
+      stop: function(){
+        draggingInProgress = false
       }
     })
     $(".card").droppable({
@@ -275,15 +280,16 @@ function createBasicBoard(){
       var activeUserId = getData('activeUserID');
       var users = getData('users')
       var chosenUser = users.forEach(user => {
-        console.log(user.id);
-        console.log(activeUserId);
+        // console.log(user.id);
+        // console.log(activeUserId);
         if (user.id === activeUserId){
           $('#modal-members').html(user.fullName)
         }
       })
-      console.log(chosenUser);
-  
-      $('#myModal').modal('show')
+      // console.log(chosenUser);
+      if (!draggingInProgress){
+        $('#myModal').modal('show')
+      }
     })
   }
 
@@ -309,7 +315,7 @@ function createBasicBoard(){
     localStorage.setItem(key, JSON.stringify(data));
   }
   function getData(key) {
-   var data = localStorage.getItem(key);
+    var data = localStorage.getItem(key);
     return JSON.parse(data);
   }
   // logout logic
@@ -336,44 +342,45 @@ function createBasicBoard(){
   function listComponent(list) {
     return `<div class="card-wrapper mt-2 ml-0 mr-2 list">
   
-	<div class="card" id="${properId(list.listName)}">
-	  <div class="card-header mb-1">
-		<h2>${list.listName}</h2>
-		<button onclick="deleteList(this)" class="delete-list">
+  <div class="card" id="${properId(list.listName)}">
+    <div class="card-header mb-1">
+    <h2>${list.listName}</h2>
+    <button onclick="deleteList(this)" class="delete-list">
       <svg height="365pt" viewBox="0 0 365.71733 365" width="365pt" xmlns="http://www.w3.org/2000/svg"><g fill="#f44336"><path d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"/><path d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"/></g></svg>
     </button>
-	  </div>
+    </div>
 
 
-	  
-	  <div class="card-bottom">
-		
-		<a href="#" class="card-composer new-todo-btn">
-		  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-			<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-		  </svg>
-		  Add another card</a>
-	  </div>
+    
+    <div class="card-bottom">
+    
+    <a href="#" class="card-composer new-todo-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg>
+      Add another card</a>
+    </div>
 
-	  <div class="new-task">
+    <div class="new-task">
 
-		<textarea class="" name="new-task" cols="24" rows="3"></textarea>
+    <textarea class="" name="new-task" cols="24" rows="3"></textarea>
 
-		<div class="add-card-actions">
-		  <button class="add-card-btn bar-2-btn" data-list="${list.listName}">Add card</button>
+    <div class="add-card-actions">
+      <button class="add-card-btn bar-2-btn" data-list="${list.listName}">Add card</button>
 
-		  <a href="#" class="cancel-todo">
-			<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-			  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-			</svg>
-		  </a>
+      <a href="#" class="cancel-todo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+      </svg>
+      </a>
 
-		</div>
-	  </div>
+    </div>
+    </div>
 
-	</div>
+  </div>
 
 
   </div>`;
   }
   console.log(boards[0])
+  
