@@ -280,7 +280,7 @@ function createBasicBoard(){
       var activeUserId = getData('activeUserID');
       var users = getData('users')
       var chosenUser = users.forEach(user => {
-        // console.log(user.id);
+        // console.log(user.id)
         // console.log(activeUserId);
         if (user.id === activeUserId){
           $('#modal-members').html(user.fullName)
@@ -383,3 +383,57 @@ function createBasicBoard(){
   </div>`;
   }
   console.log(boards[0])
+
+  $("#open-slid-menu").click(function () {
+    $("#slid-menu").slideToggle();
+  })
+  
+  $("#open-board-modail").click(function () {
+    $("#board-modai").css("display","flex");
+  })
+  $(".close-modial").click(function () {
+    $("#board-modai").css("display","none");
+  })
+  var lisColor = $(".board-style li");
+  lisColor.click(function(){
+    console.log($(this).attr("data-color"));
+    $(".board-title").css("background-color",$(this).attr("data-color"))
+  })
+  
+  $("#add-board").click(function(){
+    var newBosrdTitle = $("#titlenewbord").val();
+    if(newBosrdTitle){
+      $("#board-name").text(newBosrdTitle)
+      console.log(newBosrdTitle)
+      $("#titlenewbord").val("");
+      $("#board-modai").css("display","none");
+      var newboard = 
+    {
+      id: generateId(5),
+      title: newBosrdTitle,
+      todos:[],
+      lists: [
+        { id: generateId(5), listName: "todos", todos: [] },
+        { id: generateId(5), listName: "doing", todos: [] },
+        { id: generateId(5), listName: "done", todos: [] },
+      ],
+    };
+    boards.push(newboard)
+    saveData('boards', boards)
+    console.log($(".board-title").css("background-color"))
+    }
+  })
+  var userImg = $(".userImg");
+
+var users = JSON.parse(localStorage.getItem("users"));
+
+console.log(users);
+
+var activeUser = JSON.parse(localStorage.getItem("activeUserID"));
+
+// console.log(activeUser);
+
+for (let i = 0; i< users.length; i++){
+	if (users[i].id == activeUser)
+	userImg.text(users[i].initial);
+}

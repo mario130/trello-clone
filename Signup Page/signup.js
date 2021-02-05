@@ -65,7 +65,8 @@ $(document).ready(function () {
             email,
             fullName,
             password,
-            userName: generateUserName(fullName)
+            userName: generateUserName(fullName),
+            initial: initials(),
           };
           console.log( user)
           //saving in localstoragw
@@ -234,3 +235,14 @@ function generateUserName(fullName){
 //   })
 //   return isValid
 //  }
+
+function initials(){
+  const fullName = $("#fullName").val();
+  var splitFullName = fullName.split(" ");
+  var firstName = splitFullName[0],
+  lastName = splitFullName[1],
+  firstLiter = firstName[0].toUpperCase(),
+  lastLiter = lastName[0].toUpperCase();
+  fulLiter = firstLiter + lastLiter;
+  return fulLiter;
+}
