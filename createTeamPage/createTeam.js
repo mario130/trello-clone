@@ -50,10 +50,27 @@ $("#createTeam").on("submit", function (e) {
         teamName: teamName,
         category: category,
         teamMembers:  [activeUser[0].userName,...getTeamMembers],
+        boards: [
+          {
+            id: generateId(5),
+            title: "Board 1",
+            boardMembers: [getData('activeUserID')],
+            todoboardMembers: [getData('activeUserID')],
+            todos: [],
+            lists: [
+              { id: generateId(5), listName: "todos", todos: [] },
+              { id: generateId(5), listName: "doing", todos: [] },
+              { id: generateId(5), listName: "done", todos: [] },
+            ],
+            creatorID: getData('activeUserID'),
+            bgColor: '#1f79bf'
+          },
+        ]
       };
       teams.push(newTeam);
       localStorage.setItem("teams",JSON.stringify(teams))
-      console.log("sent ",teams)
+      saveData('currentActiveBoardIdx', 0);
+      // console.log("sent ",teams)
       $("#teamName").val("");
       $("#chooseCategory").val("");
       $("#showUsers").text("");
@@ -98,6 +115,7 @@ $(function () {
       source: teamNames,
     });
   });
+  let chosenTeamIdx;
 $("#chooseTeam").on("submit", function(e){
     e.preventDefault()
     
@@ -110,23 +128,22 @@ $("#chooseTeam").on("submit", function(e){
     $("#isExistTeam").text("")
   let teamChosen = teams.filter((team=>{
         return team.teamName === value
-    }))
-    console.log(activeUser[0])
-  //  let isParticipate = teamChosen[0].teamMembers.some(member=>{
-  //      console.log(member)
-  //       return  member === activeUser[0].userName
-  //   })
-  //   console.log(isParticipate);
-  //       if(isParticipate){
-  //         $("#isExistTeam").fadeOut()
-  //         $("#isExistTeam").text("")
-  //         // TODO redirect to main team board
+      }))
 
-  //       } else{
-  //         $("#isExistTeam").fadeIn()
-  //         $("#isExistTeam").text("you are not a participant in that team  ")
-  //       }
-      // TODO redirect to chosen team main board
+    for(let i = 0; i < teams.length; i++) {
+      if (teams[i].teamName === value){
+        chosenTeamIdx = i
+      }
+    }
+
+      if (!(teams[chosenTeamIdx].teamMembers.indexOf(activeUser[0].userName) !== -1)){
+        teams[chosenTeamIdx].teamMembers.push(activeUser[0].userName)
+        saveData('teams', teams)
+        document.location.href = "../index-page/homepage.html";
+      } else {
+        alert ('already joined this team!')
+        document.location.href = "../index-page/homepage.html";
+      }
   } else {
     $("#isExistTeam").fadeIn()
       $("#isExistTeam").text("Not exist ")
@@ -217,4 +234,13 @@ function completeAddition(input, textBadge){
     badgeNames.push(userName)
     console.log(badgeNames);
   }
+}
+
+// helper functions
+function getData(key) {
+  var data = localStorage.getItem(key);
+  return JSON.parse(data);
+}
+function saveData(key, data) {
+  localStorage.setItem(key, JSON.stringify(data));
 }

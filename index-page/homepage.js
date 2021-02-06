@@ -7,15 +7,32 @@ if (!(getData('activeUserID'))){
 /******************** Data Store ******************** */
 //initialize data
 var selectedBoard = selectedBoard ? selectedBoard : "Board 1";
-var boards = getData("boards")
+var teams = getData('teams')
+let boards;
+let activeTeamIndex;
+
+for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
+  for (let member of teams[i].teamMembers){ //loop on team members
+    for (let user of getData('users')){     //loop on users to compare
+
+      if (member === user.userName){ // match the team which has this user's id to get the team's boards
+        boards = teams[i].boards
+        const activeTeamId = teams[i].id
+        activeTeamIndex = i
+        
+      }
+    }
+  }
+}
+// var boards = getData("boards")
 var currentActiveBoardIdx = getData('currentActiveBoardIdx')
 if (!currentActiveBoardIdx){
   var currentActiveBoardIdx;
 }
 
-if (!boards){
-  createBasicBoard()
-}
+// if (!boards){
+//   createBasicBoard()
+// }
 function createBasicBoard(){
   boards = 
   [
@@ -33,7 +50,8 @@ function createBasicBoard(){
       bgColor: '#1f79bf'
     },
   ];
-  saveData('boards', boards)
+  teams[activeTeamIndex].boards = boards
+  saveData('teams', teams)
   currentActiveBoardIdx = 0;
   saveData('currentActiveBoardIdx', currentActiveBoardIdx);
 }
@@ -52,17 +70,19 @@ initializeBoardsList()
   //render
   function renderTodos(todos) {
     deleteAllTodos();
-    todos.forEach((todo) => {
-      $(`#${properId(todo.listedIn)}`)
-        .children(".card-bottom")
-        .before(
-          '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card" data-id="'+todo.id+'">' +
-            todo.title +
-            "</a></div>"
-        );
-    });
-    makeTodosDraggable()
-    activateMmodals()
+    if (todos){
+      todos.forEach((todo) => {
+        $(`#${properId(todo.listedIn)}`)
+          .children(".card-bottom")
+          .before(
+            '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card" data-id="'+todo.id+'">' +
+              todo.title +
+              "</a></div>"
+          );
+      });
+      makeTodosDraggable()
+      activateMmodals()
+    }
   }
 
   //   renderTodos(todos);
@@ -146,15 +166,16 @@ initializeBoardsList()
       isDone: false,
     };
 
+    console.log(boards[currentActiveBoardIdx]);
   boards[currentActiveBoardIdx].todos.push(todo2BeAdded);
   boards[currentActiveBoardIdx].lists.forEach(list=>{
     if(list.listName === todo2BeAdded.listedIn){
       list.todos.push(todo2BeAdded)
     }
   })
-    saveData("boards",boards)
+  teams[activeTeamIndex].boards = boards
+    saveData("teams",teams)
 
-  //  console.log(boards[0].todos);
     renderTodos(boards[currentActiveBoardIdx].todos);
     $(this).parent().prev().val("");
     $(this).parents(".new-task").children("textarea").focus();
@@ -200,8 +221,8 @@ initializeBoardsList()
         todos: [],
       };
       
-      boards[currentActiveBoardIdx].lists.push(list);
-      saveData('boards', boards)
+      teams[activeTeamIndex].boards[currentActiveBoardIdx].lists.push(list);
+      saveData('teams', teams)
       renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
       renderTodos(boards[currentActiveBoardIdx].todos);
     }
@@ -225,9 +246,9 @@ initializeBoardsList()
       }
       if (listIdxToBeDeleted > -1) {
         // console.log('present', listIdxToBeDeleted);
-        boards[currentActiveBoardIdx].lists.splice(listIdxToBeDeleted, 1)
+        teams[activeTeamIndex].boards[currentActiveBoardIdx].lists.splice(listIdxToBeDeleted, 1)
         // console.log(boards);
-        saveData('boards', boards)
+        saveData('teams', teams)
         renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
         renderTodos(boards[currentActiveBoardIdx].todos);
         // console.log('deleted');
@@ -277,7 +298,7 @@ initializeBoardsList()
         boards[currentActiveBoardIdx].todos.forEach(function(todo){
           if (todo.id === ui.draggable[0].getAttribute('id')){
             todo.listedIn = ev.target.id;
-            saveData('boards', boards)
+            saveData('teams', teams)
             renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
           }
         })
@@ -293,10 +314,10 @@ initializeBoardsList()
     // activate modal on press
     $('.list-card').click(function(){
       $('.modal-title').html(this.textContent)
-  
+      
       // loop for the chosen todo to get its info
       var todos = boards[currentActiveBoardIdx].todos
-      var chosenId = $(this)[currentActiveBoardIdx].getAttribute('data-id')
+      var chosenId = $(this)[0].getAttribute('data-id')
       activeModalTodoId = chosenId
       var chosenTodo = []; 
       todos.forEach(todo => {
@@ -306,6 +327,7 @@ initializeBoardsList()
       })
 
       // fill todo description
+      $('#desc').html('')
       $('#desc').html(chosenTodo[0].description)
 
       // get current user full name
@@ -316,6 +338,9 @@ initializeBoardsList()
         // console.log(activeUserId);
         if (user.id === activeUserId){
           $('#modal-members').html(user.fullName)
+          ////////////////////////////////////////////    TODO      ////////////////////////////////
+          // write todo members logic 
+          
         }
       })
       // console.log(chosenUser);
@@ -326,10 +351,10 @@ initializeBoardsList()
   }
 
   function saveDescription(ev){
-    boards[0].todos.map(todo => {
+    boards[currentActiveBoardIdx].todos.map(todo => {
       if (todo.id === activeModalTodoId){
         todo.description = $($(ev).parent().prev()[0]).find('#desc').val()
-        saveData('boards', boards)
+        saveData('teams', teams)
         renderTodos(boards[currentActiveBoardIdx].todos);
       }
     })
@@ -362,10 +387,10 @@ initializeBoardsList()
   }
   // TODO
   function getBasicBoard(){
-    boards[0].lists = []
-    boards[0].todos = []
+    teams[activeTeamIndex].boards[0].lists = []
+    teams[activeTeamIndex].boards[0].todos = []
     createBasicBoard()
-    saveData('boards', boards)
+    saveData('teams', teams)
     renderList(boards[0].lists,boards[0].todos);
     renderTodos(boards[0].todos);
     initializeBoardsList()
@@ -448,6 +473,7 @@ initializeBoardsList()
     {
       id: generateId(5),
       title: newBoardTitle,
+      boardMembers: [getData('activeUserID')],
       todos:[],
       lists: [
         { id: generateId(5), listName: "todos", todos: [] },
@@ -457,8 +483,8 @@ initializeBoardsList()
       creatorID: getData('activeUserID'),
       bgColor: $(".board-title").css("background-color")
     };
-    boards.push(newboard)
-    saveData('boards', boards)
+    teams[activeTeamIndex].boards.push(newboard)
+    saveData('teams', teams)
     renderList(boards[boards.length-1].lists,boards[boards.length-1].todos);
     renderTodos(boards[boards.length-1].todos)
     currentActiveBoardIdx = boards.length-1
@@ -489,4 +515,25 @@ function switchBoard(idx){
   renderList(boards[idx].lists,boards[idx].todos);
   renderTodos(boards[idx].todos)
   $('#slid-menu').slideUp();
+  $(".currentBoardName").text(boards[idx].title)
+}
+
+// Get dummy data
+function getDummyData(){
+
+  const teams = fetch('./dummy data/teams.json')
+  teams.then(res => res.json()).then(res => {
+    saveData('teams', res)
+    renderList(res[0].boards[0].lists, res[0].boards[0].todos);
+    boards = res[0].boards
+    initializeBoardsList()
+  })
+  
+  const users = fetch('./dummy data/users.json')
+  users.then(res => res.json()).then(res => {
+    saveData('users', res)
+  })
+
+  saveData('activeUserID', "_NekmV__*u@c#C$&X4JfR")
+  saveData('currentActiveBoardIdx', 0)
 }
