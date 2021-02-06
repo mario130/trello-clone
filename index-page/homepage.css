@@ -259,13 +259,13 @@
 .bar-2-btn span {
 	font-size: 14px;
 }
-#favourite svg{
+/* #favourite svg{
 	position: relative;
 	bottom: 2px;
 }
 #favourite:hover svg{
 	fill: yellow;
-}
+} */
 
 /* for horizontal navigation later */
 /* #board{

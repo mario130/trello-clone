@@ -1,3 +1,8 @@
+// detect if user passed login
+if (!(getData('activeUserID'))){
+  document.location.href = "/log-in/login.html";
+}
+
 //data
 /******************** Data Store ******************** */
 //initialize data
@@ -66,6 +71,9 @@ initializeBoardsList()
     lists.forEach((list) => {
       $("#listItems").append(listComponent(list));
     });
+
+    // update board title button on every list render
+    $('.currentBoardName').html(boards[currentActiveBoardIdx].title)
     renderTodos(todos)
   }
   if (!currentActiveBoardIdx) {
@@ -73,7 +81,6 @@ initializeBoardsList()
     saveData('currentActiveBoardIdx', currentActiveBoardIdx);
   }
   renderList(boards[currentActiveBoardIdx].lists,boards[currentActiveBoardIdx].todos);
-  $('.currentBoardName').html(selectedBoard)
 
   /**************************** handling by events ************************************* */
 

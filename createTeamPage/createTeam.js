@@ -112,18 +112,21 @@ $("#chooseTeam").on("submit", function(e){
         return team.teamName === value
     }))
     console.log(activeUser[0])
-   let isParticipate = teamChosen[0].teamMembers.some(member=>{
-       console.log(member)
-        return  member === activeUser[0].userName
-    })
-        if(isParticipate){
- $("#isExistTeam").fadeOut()
-$("#isExistTeam").text("")
+  //  let isParticipate = teamChosen[0].teamMembers.some(member=>{
+  //      console.log(member)
+  //       return  member === activeUser[0].userName
+  //   })
+  //   console.log(isParticipate);
+  //       if(isParticipate){
+  //         $("#isExistTeam").fadeOut()
+  //         $("#isExistTeam").text("")
+  //         // TODO redirect to main team board
 
-        } else{
-            $("#isExistTeam").fadeIn()
-            $("#isExistTeam").text("you are not a participant in that team  ")
-        }
+  //       } else{
+  //         $("#isExistTeam").fadeIn()
+  //         $("#isExistTeam").text("you are not a participant in that team  ")
+  //       }
+      // TODO redirect to chosen team main board
   } else {
     $("#isExistTeam").fadeIn()
       $("#isExistTeam").text("Not exist ")
