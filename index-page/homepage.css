@@ -184,7 +184,8 @@
 	background-color: rgba(255, 255, 255, 0.4);
 }
 .bar-2-btn {
-	margin-bottom: 5px;
+	margin-bottom: 8px;
+	/* padding-bottom: 4px; */
 }
 .btn-no-text svg {
 	font-weight: 700;
@@ -240,12 +241,63 @@
 	width: 30px;
 	height: 30px;
 	background-color: red;
+	border: 2px solid white;
 	border-radius: 50%;
 	color: white;
 	text-align: center;
-	line-height: 30px;
-	font-size: 15px;
+	line-height: 26px;
+	font-size: 14px;
 	font-weight: 600;
+	display: inline-block;
+	margin-left: 5px;
+	transition: all .4s;
+	cursor: pointer;
+}
+.userImg:first-of-type{
+	background-color: rgb(251, 133, 0);
+}
+.userImg:nth-of-type(2){
+	background-color: rgb(217, 4, 41);
+}
+.userImg:last-of-type{
+	background-color: #1967a3;
+}
+
+#active-user{
+	background-color: #1967a3;
+}
+#team-members {
+	display: inline-flex;
+	align-items: center;
+	/* position: relative; */
+	/* top: 9px; */
+	/* padding: 0 8px 0 3px; */
+	background-color: rgba(255, 255, 255, 0.3);
+	border-radius: 25px;
+}
+#team-members .userImg:first-of-type{
+	margin-left: 0;
+}
+/* tooltip */
+.userImg .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 18888888;
+  top: 0;
+  left: 52%;
+  margin-left: -60px;
+}
+
+.userImg:hover .tooltiptext {
+  visibility: visible;
 }
 
 /* BAR 2 */

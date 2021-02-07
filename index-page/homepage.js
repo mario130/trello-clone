@@ -38,11 +38,28 @@ if (!currentActiveBoardIdx){
 // display team name
 $('#team-name').html(teams[activeTeamIndex].teamName)
 
+// display team members
+$('.pl-13').append('<div id="team-members"></div>')
+function displayMembers(){
+  // console.log(teams[activeTeamIndex].teamMembers);
+  var users = getData('users')
+
+  for (member of teams[activeTeamIndex].teamMembers){
+    for (user of users) {
+      if (member === user.userName){
+        $('#team-members').append(`<div class = "userImg">${user.initial}<span class="tooltiptext">${user.fullName}</span></div>`)
+      }
+    }
+  }
+}
+displayMembers()
+
 function colorTheBoard(){
   var currentActiveBoardIdx = getData('currentActiveBoardIdx')
   $('.bar-1').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
   $('.bar-2').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
   $('.slid-menu-board').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
+
 }
 colorTheBoard()
 
@@ -108,7 +125,7 @@ initializeBoardsList()
     });
 
     // update board title button on every list render
-    console.log(boards);
+    // console.log(boards);
     $('.currentBoardName').html(boards[currentActiveBoardIdx].title)
     renderTodos(todos)
   }
@@ -183,7 +200,7 @@ initializeBoardsList()
       isDone: false,
     };
 
-    console.log(boards[currentActiveBoardIdx]);
+    // console.log(boards[currentActiveBoardIdx]);
   boards[currentActiveBoardIdx].todos.push(todo2BeAdded);
   boards[currentActiveBoardIdx].lists.forEach(list=>{
     if(list.listName === todo2BeAdded.listedIn){
@@ -500,7 +517,7 @@ initializeBoardsList()
     
     if(newBoardTitle){
       $("#board-name").text(newBoardTitle)
-      console.log(newBoardTitle)
+      // console.log(newBoardTitle)
       $("#titlenewbord").val("");
       $("#board-modai").css("display","none");
       var newboard = 
@@ -522,8 +539,8 @@ initializeBoardsList()
     renderList(boards[boards.length-1].lists,boards[boards.length-1].todos);
     renderTodos(boards[boards.length-1].todos)
     currentActiveBoardIdx = teams[activeTeamIndex].boards.length-1
-    console.log(currentActiveBoardIdx);
-    console.log(boards);
+    // console.log(currentActiveBoardIdx);
+    // console.log(boards);
     saveData('currentActiveBoardIdx', currentActiveBoardIdx);
     
     $('#slid-menu').slideUp()
@@ -535,6 +552,8 @@ initializeBoardsList()
     }
   })
   var userImg = $(".userImg");
+  // console.log(userImg);
+  // userImg.text('sd');
 
 var users = JSON.parse(localStorage.getItem("users"));
 var activeUser = JSON.parse(localStorage.getItem("activeUserID"));
@@ -542,8 +561,9 @@ var activeUser = JSON.parse(localStorage.getItem("activeUserID"));
 // console.log(activeUser);
 
 for (let i = 0; i< users.length; i++){
-	if (users[i].id == activeUser)
-	userImg.text(users[i].initial);
+	if (users[i].id == activeUser){
+    $(userImg[0]).text(users[i].initial);
+  }
 }
 
 function switchBoard(idx){
@@ -552,7 +572,7 @@ function switchBoard(idx){
   renderList(boards[idx].lists,boards[idx].todos);
   renderTodos(boards[idx].todos)
   $('#slid-menu').slideUp();
-  console.log(boards[idx].title);
+  // console.log(boards[idx].title);
   $(".currentBoardName").text(boards[idx].title)
   $("#board-name").text(boards[idx].title)
   colorTheBoard()
@@ -607,7 +627,7 @@ function deleteBoard(){
   }
   delete teams[activeTeamIndex].boards[currentActiveBoardIdx];
   teams[activeTeamIndex].boards = teams[activeTeamIndex].boards.filter(board => board)
-  console.log(teams[activeTeamIndex].boards);
+  // console.log(teams[activeTeamIndex].boards);
 
   currentActiveBoardIdx = 0
   saveData('currentActiveBoardIdx', currentActiveBoardIdx)
