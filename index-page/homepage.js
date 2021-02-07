@@ -485,6 +485,14 @@ initializeBoardsList()
   
   $("#add-board").click(function(){
     var newBoardTitle = $("#titlenewbord").val();
+
+    teams[activeTeamIndex].boards.forEach(board => {
+      if (board.title === newBoardTitle) {
+        alert('board already present')
+        throw 'board already present'
+      }
+    })
+    
     if(newBoardTitle){
       $("#board-name").text(newBoardTitle)
       console.log(newBoardTitle)
