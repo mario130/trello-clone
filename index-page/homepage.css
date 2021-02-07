@@ -124,11 +124,6 @@
 	width: 100%;
 	text-align: left;
 	transition: all .4s;
-	opacity: .7;
-}
-.slid-menu-board .slid-board button.boardLink:hover{
-	opacity: 1;
-
 }
 .close-slid-menu {
 	position: absolute;
@@ -487,4 +482,8 @@ background-color: #ffffff52;
 }
 .todo-leave .card-bottom{
 	margin-top: 0;
+}
+
+textarea{
+	width: 100%;
 }

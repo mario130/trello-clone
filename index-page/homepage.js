@@ -356,6 +356,7 @@ initializeBoardsList()
       })
       // console.log(chosenUser);
       if (!draggingInProgress){
+        $('#myModal').appendTo("body").modal('show');
         $('#myModal').modal('show')
       }
     })
