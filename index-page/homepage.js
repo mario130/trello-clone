@@ -33,6 +33,15 @@ if (!currentActiveBoardIdx){
 // if (!boards){
 //   createBasicBoard()
 // }
+
+function colorTheBoard(){
+  var currentActiveBoardIdx = getData('currentActiveBoardIdx')
+  $('.bar-1').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
+  $('.bar-2').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
+  $('.slid-menu-board').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
+}
+colorTheBoard()
+
 function createBasicBoard(){
   boards = 
   [
@@ -93,6 +102,7 @@ initializeBoardsList()
     });
 
     // update board title button on every list render
+    console.log(boards);
     $('.currentBoardName').html(boards[currentActiveBoardIdx].title)
     renderTodos(todos)
   }
@@ -153,6 +163,7 @@ initializeBoardsList()
   //click on add-card-btn and adding todo in
 
   $("#listItems").on("click", ".add-card-btn", function (ev) {
+    var currentActiveBoardIdx = getData('currentActiveBoardIdx')
     var todoName = $(this).parent().prev().val();
     if (todoName.trim() === "") return;
 
@@ -453,6 +464,13 @@ initializeBoardsList()
     $("#board-modai").css("display","flex");
     $('#titlenewbord').focus()
   })
+  // $('.clr').css({'background-color': this.dataset.color})
+  // $('.clr')[0].getAttribute('data-color')
+  // console.log($('.clr').dataset.color);
+  $('.clr').each(function(idx, val){
+    // console.log(val.dataset.color);
+    $(this).css({'background-color': val.dataset.color})
+  })
   $(".close-modial").click(function () {
     $("#board-modai").fadeOut();
   })
@@ -487,11 +505,14 @@ initializeBoardsList()
     saveData('teams', teams)
     renderList(boards[boards.length-1].lists,boards[boards.length-1].todos);
     renderTodos(boards[boards.length-1].todos)
-    currentActiveBoardIdx = boards.length-1
+    currentActiveBoardIdx = teams[activeTeamIndex].boards.length-1
+    console.log(currentActiveBoardIdx);
+    console.log(boards);
     saveData('currentActiveBoardIdx', currentActiveBoardIdx);
     
     $('#slid-menu').slideUp()
     initializeBoardsList()
+    colorTheBoard()
     
     } else {
       alert('Please enter the board title')
@@ -515,16 +536,22 @@ function switchBoard(idx){
   renderList(boards[idx].lists,boards[idx].todos);
   renderTodos(boards[idx].todos)
   $('#slid-menu').slideUp();
+  console.log(boards[idx].title);
   $(".currentBoardName").text(boards[idx].title)
+  $("#board-name").text(boards[idx].title)
+  colorTheBoard()
 }
 
 // Get dummy data
 function getDummyData(){
 
+  localStorage.clear()
+
   const teams = fetch('./dummy data/teams.json')
   teams.then(res => res.json()).then(res => {
     saveData('teams', res)
     renderList(res[0].boards[0].lists, res[0].boards[0].todos);
+    $('.currentBoardName').html('Board 1')
     boards = res[0].boards
     initializeBoardsList()
   })
@@ -533,7 +560,11 @@ function getDummyData(){
   users.then(res => res.json()).then(res => {
     saveData('users', res)
   })
+  .then(()=>location.reload())
 
   saveData('activeUserID', "_NekmV__*u@c#C$&X4JfR")
   saveData('currentActiveBoardIdx', 0)
+
+  colorTheBoard()
+
 }
