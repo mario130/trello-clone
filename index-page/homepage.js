@@ -35,6 +35,9 @@ if (!currentActiveBoardIdx){
 //   createBasicBoard()
 // }
 
+// display team name
+$('#team-name').html(teams[activeTeamIndex].teamName)
+
 function colorTheBoard(){
   var currentActiveBoardIdx = getData('currentActiveBoardIdx')
   $('.bar-1').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
