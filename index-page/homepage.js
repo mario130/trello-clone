@@ -10,6 +10,7 @@ var selectedBoard = selectedBoard ? selectedBoard : "Board 1";
 var teams = getData('teams')
 let boards;
 let activeTeamIndex;
+let selectedTodo;
 
 for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
   for (let member of teams[i].teamMembers){ //loop on team members
@@ -84,7 +85,7 @@ initializeBoardsList()
         $(`#${properId(todo.listedIn)}`)
           .children(".card-bottom")
           .before(
-            '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card" data-id="'+todo.id+'">' +
+            '<div class="list-cards" id="'+todo.id+'"><a href="#" class="list-card" data-id="'+todo.id+'" data-done="'+todo.isDone+'">' +
               todo.title +
               "</a></div>"
           );
@@ -324,6 +325,7 @@ initializeBoardsList()
 
     // activate modal on press
     $('.list-card').click(function(){
+      selectedTodo = this.dataset.id
       $('.modal-title').html(this.textContent)
       
       // loop for the chosen todo to get its info
@@ -568,4 +570,18 @@ function getDummyData(){
 
   colorTheBoard()
 
+}
+
+// done todo
+function doneTodo(){
+  teams[activeTeamIndex].boards[currentActiveBoardIdx].todos.map(todo => {
+    if (todo.id === selectedTodo){
+      todo.isDone = !todo.isDone;
+      saveData('teams', teams)
+      $('.list-card[data-done="true"]').css({
+        'text-decoration': 'line-through'
+      })
+      renderTodos(boards[currentActiveBoardIdx].todos)
+    }
+  })
 }

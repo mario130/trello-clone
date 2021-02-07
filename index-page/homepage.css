@@ -487,3 +487,7 @@ background-color: #ffffff52;
 textarea{
 	width: 100%;
 }
+.list-card[data-done="true"]{
+	text-decoration: line-through!important;
+	font-style: italic;
+}
