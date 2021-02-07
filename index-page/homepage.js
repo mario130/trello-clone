@@ -97,6 +97,8 @@ initializeBoardsList()
 
   //   renderTodos(todos);
   function renderList(lists,todos) {
+    let teams = getData('teams')
+    let boards = teams[activeTeamIndex].boards
     deleteAllLists();
     lists.forEach((list) => {
       $("#listItems").append(listComponent(list));
@@ -592,4 +594,24 @@ function doneTodo(){
       renderTodos(boards[currentActiveBoardIdx].todos)
     }
   })
+}
+
+// Delete board logic
+function deleteBoard(){
+  if (teams[activeTeamIndex].boards.length < 2) {
+    alert('There\'s no boards left except this one')
+    throw 'no boards left'
+  }
+  delete teams[activeTeamIndex].boards[currentActiveBoardIdx];
+  teams[activeTeamIndex].boards = teams[activeTeamIndex].boards.filter(board => board)
+  console.log(teams[activeTeamIndex].boards);
+
+  currentActiveBoardIdx = 0
+  saveData('currentActiveBoardIdx', currentActiveBoardIdx)
+  saveData('teams', teams)
+  boards = teams[activeTeamIndex].boards
+  renderList(teams[activeTeamIndex].boards[0].lists, teams[activeTeamIndex].boards[0].todos)
+  colorTheBoard()
+  initializeBoardsList()
+  $('#board-name').html(boards[0].title)
 }
