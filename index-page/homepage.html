@@ -152,15 +152,16 @@
 
         <span class="divider"></span>
         
-        <button class="bar-2-btn">
-          <span id="team-name">team name</span>
-          <span class="free-span">free</span>
-        </button>
-
-        <span class="divider"></span>
-        
         <button class="bar-2-btn" onclick="deleteBoard()">
           <span>Delete board</span>
+        </button>
+        
+        <span class="divider"></span>
+        
+        <button class="bar-2-btn">
+          <img style="width: 20px; margin-right: 5px;" src="https://img.icons8.com/ios-glyphs/30/000000/group-foreground-selected.png"/>
+          <span id="team-name">team name</span>
+          <span class="free-span">free</span>
         </button>
         
         <!-- <button class="bar-2-btn">
@@ -169,16 +170,18 @@
         
         <span class="divider"></span>
 
+        <span id="team"></span>
+
         
-      </div>
-      <div class="col-auto pr-3">
-        <button class="bar-2-btn" onclick="getBasicBoard()" style="border: 1px solid red; background: rgb(255, 126, 146)">
+        <button class="bar-2-btn test-btn" onclick="getBasicBoard()">
           <span>Starting</span>
         </button>
   
-        <button class="bar-2-btn" onclick="getDummyData()" style="border: 1px solid red; background: rgb(255, 126, 146)">
+        <button class="bar-2-btn test-btn" onclick="getDummyData()">
           <span>Dummy</span>
         </button>
+      </div>
+      <div class="col-auto pr-3">
         
         <!-- <button class="bar-2-btn">
           <span>Butler</span>

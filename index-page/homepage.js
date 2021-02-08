@@ -39,7 +39,7 @@ if (!currentActiveBoardIdx){
 $('#team-name').html(teams[activeTeamIndex].teamName)
 
 // display team members
-$('.pl-13').append('<div id="team-members"></div>')
+$('#team').append('<div id="team-members"></div>')
 function displayMembers(){
   // console.log(teams[activeTeamIndex].teamMembers);
   var users = getData('users')
@@ -47,10 +47,11 @@ function displayMembers(){
   for (member of teams[activeTeamIndex].teamMembers){
     for (user of users) {
       if (member === user.userName){
-        $('#team-members').append(`<div class = "userImg">${user.initial}<span class="tooltiptext">${user.fullName}</span></div>`)
+        $('#team-members').append(`<div class = "userImg"><span class="initials">${user.initial}</span><span class="tooltiptext">${user.fullName}</span></div>`)
       }
     }
   }
+  $('#team-members').append('<span id="members-tag">Members</span>')
 }
 displayMembers()
 

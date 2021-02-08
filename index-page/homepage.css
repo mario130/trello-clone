@@ -225,6 +225,13 @@
 	position: relative;
 	bottom: 5px;
 }
+.test-btn{
+	border: 1px solid gainsboro;
+	background: #e76f51
+}
+.test-btn:hover{
+	background: #e65632
+}
 .trello-logo {
 	background-image: url("https://a.trellocdn.com/prgb/dist/images/header-logo-2x.01ef898811a879595cea.png");
 	background-position: 100% 0;
@@ -252,6 +259,7 @@
 	margin-left: 5px;
 	transition: all .4s;
 	cursor: pointer;
+	overflow: hidden;
 }
 .userImg:first-of-type{
 	background-color: rgb(251, 133, 0);
@@ -274,10 +282,23 @@
 	/* padding: 0 8px 0 3px; */
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 25px;
+	margin-right: 10px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+#team-members span#members-tag {
+	margin-left: 10px;
+	color: white;
+	font-weight: bold;
 }
 #team-members .userImg:first-of-type{
 	margin-left: 0;
 }
+.initials{
+	position: relative;
+	right: 1px;
+}
+
 /* tooltip */
 .userImg .tooltiptext {
   visibility: hidden;
@@ -291,8 +312,8 @@
   /* Position the tooltip */
   position: absolute;
   z-index: 18888888;
-  top: 0;
-  left: 52%;
+  top: -2px;
+  left: 66%;
   margin-left: -60px;
 }
 

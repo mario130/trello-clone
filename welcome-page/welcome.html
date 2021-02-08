@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trello</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,800;0,900;1,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="welcome.css">
+</head>
+
+<body>
+  <!-- Start Header -->
+  <header class="fixed-top">
+    <nav class="navbar py-3" id="navbar">
+      <a href="#">
+        <svg class="d-block" width="130" height="40" viewBox="0 0 885 272" alt="Trello">
+          <g fill="#fff" fill-rule="evenodd">
+            <path
+              d="M723.294 178.59c-12.77 5.203-22.85 23.18-38.176 33.4-.95.632-1.9.95-2.534.95-1.267 0-2.85-1.268-2.85-6.97 0-19.642 6.335-29.146 11.72-43.085 18.692-48.47 50.688-89.97 79.2-135.274 2.218-3.484 3.485-7.285 3.485-11.404 0-3.484-1.268-6.336-2.852-9.82C770.02 3.534 764.318 1 757.982 1c-3.484 0-6.652.317-10.77.317-14.89 0-18.058 21.86-21.543 27.56-23.76 40.235-51.006 89.973-64.945 125.137-3.057 7.883-6.36 15.767-8.868 23.857-13.775 3.99-24.095 23.358-40.236 34.12-.95.632-1.9.95-2.534.95-1.267 0-2.85-1.268-2.85-6.97 0-19.642 6.335-29.146 11.72-43.085 18.692-48.47 50.69-89.97 79.2-135.274 2.218-3.484 3.486-7.285 3.486-11.404 0-3.484-1.268-6.336-2.852-9.82C696.523 3.534 690.82 1 684.485 1c-3.485 0-6.653.317-10.77.317-14.89 0-18.06 21.86-21.544 27.56-23.76 40.235-51.004 89.973-64.943 125.137-1.108 2.858-2.248 5.716-3.372 8.584-.346.185-.7.386-1.063.604-16.157 9.504-29.78 26.294-49.42 37.7-3.802 2.216-15.524 10.453-25.028 10.453-2.218 0-4.118-.633-6.02-1.584-2.85-1.266-5.702-7.285-5.702-9.186 0-1.584.317-1.9 3.485-3.802 27.88-16.79 50.688-40.867 70.33-64.944 7.286-8.87 16.79-26.294 16.79-38.966 0-8.237-2.85-17.74-12.672-21.226-6.97-2.534-14.89-3.8-21.225-3.8-16.79 0-29.146 7.602-36.116 14.888-7.095 7.575-13.958 15.353-20.335 23.405-6.663-5.753-16.06-8.2-24.968-8.2-10.454 0-30.096 12.99-40.234 20.593-1.584 1.267-2.534 1.9-3.168 1.9-.316 0-.633-.316-.633-.95 0-.317.633-3.168.633-8.237 0-4.435-.95-10.137-5.068-17.107-.95-1.585-6.653-5.07-13.623-5.07-8.554 0-16.474 4.12-16.474 8.554 0 3.168 2.85 4.435 2.85 7.286 0 1.584-1.266 8.87-3.167 15.84-5.387 20.276-12.04 40.234-19.01 60.192-3.8 11.088-16.473 20.91-16.473 32.948 0 3.8 2.535 8.87 6.02 12.672 5.702 6.336 9.187 8.553 14.255 8.553 2.218 0 4.752-.633 6.97-2.534 4.752-4.118 7.286-8.236 8.554-13.938 8.236-37.383 31.996-62.727 58.29-79.517 8.87-5.703 20.91-11.722 22.494-11.722 1.624 0 4.164.75 6.724 1.48-7.35 11.99-13.306 24.632-17.18 38.12-1.266 4.435-1.9 8.554-1.9 12.99 0 7.285 1.584 14.89 4.12 22.175 3.484 10.138 9.186 19.008 17.106 23.126 14.573 7.604 25.027 11.722 34.53 11.722 5.387 0 9.505-.95 13.94-3.485 20.823-11.78 33.59-20.718 42.807-28.656.253 8.05 1.84 12.508 7.565 18.52 5.702 6.02 14.572 11.404 26.294 13.94 1.9.316 3.802.632 5.702.632 13.41 0 26.318-10.9 36.27-21.706 1.152 2.358 2.827 4.61 5.23 7.134 5.704 6.02 14.574 11.404 26.296 13.94 1.9.316 3.8.632 5.702.632 15.71 0 30.727-14.957 41.114-27.2 3.462 7.162 13.137 14.24 24.78 19.914 3.168 1.584 6.97 2.534 10.455 2.534 13.622 0 23.443-11.088 31.046-19.324 19.643-21.543 30.414-48.154 38.65-81.735.634-2.534 1.585-3.485 2.852-3.485 3.168 0 7.286 0 11.722-.633 8.553-1.267 15.206-4.12 23.126-5.386 4.752-.95 4.118-2.533 8.554-4.117 3.168-1.267 5.702-2.535 5.702-5.703 0-5.385-9.82-11.088-24.71-11.088-11.722 0-18.692.95-23.444.95-7.286 0-9.187-2.217-13.94-14.572 0 0 4.753 12.355 0 0-.95-2.534-1.9-3.802-4.75-6.336-6.654-5.702-14.89-7.603-21.543-7.603-15.84 0-29.464 16.158-38.968 29.78-2.217 3.168-5.385 5.702-7.603 9.187-13.05 19.575-25.545 41.65-27.086 65.443zM318.264 70.696c7.92 0 12.355-.634 13.306-.634.95 0 1.584.317 1.584 1.268 0 .633-.317 1.584-2.535 6.336-19.326 41.5-32.63 83.635-44.353 130.204-.317 1.268-1.267 6.02-1.267 10.772 0 4.435 1.267 9.187 5.702 11.72 8.554 5.07 15.524 7.288 20.276 7.288 6.97 0 10.454-4.436 10.454-11.722 0-6.336.317-12.99 1.267-18.058 8.87-46.57 22.175-83 42.767-121.017 9.82-18.058 11.088-19.008 11.088-20.592 0-.633-.317-1.583-.95-2.534 12.672-2.85 27.878-4.752 41.817-4.752 1.584 0 7.92 2.218 8.87 3.168 2.218 2.218 4.436 4.436 8.238 4.436 3.168 0 8.553-2.218 10.454-3.485 4.435-3.168 6.653-6.653 6.653-12.355 0-5.386-19.96-18.692-33.898-18.692-17.108 0-32.63 2.218-47.204 5.07-6.336 1.266-29.146 4.75-45.62 4.75-15.84 0-14.89-2.216-21.542-2.216-3.8 0-5.702 1.9-7.286 3.484-1.584 1.584-2.534 7.92-2.534 13.623 0 2.85 0 5.07 1.584 6.97 4.752 5.702 13.94 6.97 23.126 6.97 0 0-9.187 0 0 0zm234.75 25.66c0 2.852-.952 4.753-4.753 10.772-3.8 6.02-2.217 6.02-6.97 12.355-9.186 12.355-20.59 24.71-35.48 38.333-4.12 3.802-4.752 3.802-5.386 3.802-.317 0-.95-.317-.95-.95 0-.95.316-2.218 3.484-8.87 9.82-20.593 21.86-34.216 35.165-47.52 7.287-7.288 11.722-9.822 13.306-9.822.95 0 1.583.317 1.583 1.9 0 0 0-1.583 0 0zm243.618 8.238c.317 0 .634.316.95.95.317.95.95 1.9 2.535 3.168 1.267.95 1.267 5.386 1.267 8.87 0 30.73-17.424 56.074-34.53 81.735-3.803 5.702-6.02 6.653-7.92 6.653-1.585 0-4.12-4.12-5.07-6.653-1.267-3.485-1.584-7.603-1.584-9.187 0-24.71 23.443-61.46 38.966-81.735 2.535-3.485 4.436-3.8 5.386-3.8 0 0-.95 0 0 0z">
+            </path>
+            <path
+              d="M75 36c-13.807 0-25 11.2-25 25v150c0 13.806 11.2 25 25 25h150c13.806 0 25-11.2 25-25V61c0-13.807-11.2-25-25-25H75zm99.997 26C168.37 62 163 67.372 163 74.006v63.988c0 6.63 5.373 12.006 11.997 12.006h37.006c6.626 0 11.997-5.372 11.997-12.006V74.006C224 67.376 218.627 62 212.003 62h-37.006zm-87 0C81.37 62 76 67.367 76 74.005v113.99C76 194.625 81.373 200 87.997 200h37.006c6.626 0 11.997-5.367 11.997-12.005V74.005C137 67.375 131.627 62 125.003 62H87.997z">
+            </path>
+          </g>
+        </svg>
+      </a>
+      <div>
+        <a href="log-in/login.html" class="btn btn-link btn-sm text-white">Log In</a>
+        <a href="Signup Page/signup.html" class="bg-white btn btn-sm font-weight-bold sig-up">Sign Up</a>
+      </div>
+    </nav>
+  </header>
+  <!-- End Header -->
+  <!-- Start Hero Section -->
+  <section class="hero">
+    <div class="container text-white">
+      <div class="align-items-center row text-center text-md-left">
+        <div class="col-6">
+          <h1>Trello helps teams work more collaboratively and get more done.</h1>
+          <p>Trello’s boards, lists, and cards enable teams to organize and prioritize projects in a fun, flexible, and
+            rewarding way.</p>
+        </div>
+        <div class="col-6">
+          <img src="images/hero-a.svg" alt="" class="img-fluid">
+        </div>
+        <form action="Signup Page/signup.html" method="" class="d-flex justify-content-start pt-5 px-3">
+          <input type="email" name="email" id="" placeholder="Email" class="p-1 pl-3 rounded border-0">
+          <input type="submit" value=" Sign Up – It’s Free!" class="btn btn-lg btn-success px-4">
+        </form>
+      </div>
+    </div>
+  </section>
+  <!-- End Hero Section -->
+  <!-- Start Collaborate -->
+  <section class="collaborate">
+    <div class="container py-5 pb-md-0">
+      <div class="row align-items-center">
+        <div class="col-md-7 order-md-2">
+          <div class="board">
+            <header>
+              <h3>Team Tasks</h3>
+            </header>
+            <div class="lists">
+              <!-- Start List -->
+              <div class="list">
+                <!-- Start List Content -->
+                <div class="list-content">
+                  <h5>Doing</h5>
+                  <!-- Start Card -->
+                  <div class="task">
+                    <!-- Start Prorges -->
+                    <div class="labels my-1">
+                      <div class="label label-blue"></div>
+                    </div>
+                    <!-- End Prorges -->
+                    <p> Client meeting </p>
+                    <div class="card-content">
+                      <div class="description">
+                        <svg height="10" viewBox="0 0 16 10" width="16" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="m1 0h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h8c.55228475 0 1 .44771525 1 1s-.44771525 1-1 1h-8c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1z"
+                            fill="#30364c" fill-rule="evenodd" opacity=".3"></path>
+                        </svg>
+                      </div>
+                      <div class="card-users">
+                        <div class="user user-1"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Ens Card -->
+                  <!-- Start Card -->
+                  <div class="task">
+                    <!-- Start Prorges -->
+                    <div class="labels my-1">
+                      <div class="label label-red"></div>
+                    </div>
+                    <!-- End Prorges -->
+                    <p> Client meeting </p>
+                    <div class="card-content">
+                      <div class="description">
+                        <svg height="10" viewBox="0 0 16 10" width="16" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="m1 0h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h8c.55228475 0 1 .44771525 1 1s-.44771525 1-1 1h-8c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1z"
+                            fill="#30364c" fill-rule="evenodd" opacity=".3"></path>
+                        </svg>
+                      </div>
+                      <div class="card-users">
+                        <div class="user user-1"></div>
+                        <div class="user user-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Ens Card -->
+                  <!-- Start Card -->
+                  <div class="task">
+                    <!-- Start Prorges -->
+                    <div class="labels my-1">
+                      <div class="label label-purple"></div>
+                    </div>
+                    <!-- End Prorges -->
+                    <p> Client meeting </p>
+                    <div class="card-content">
+                      <div class="description">
+                        <svg height="10" viewBox="0 0 16 10" width="16" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="m1 0h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h8c.55228475 0 1 .44771525 1 1s-.44771525 1-1 1h-8c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1z"
+                            fill="#30364c" fill-rule="evenodd" opacity=".3"></path>
+                        </svg>
+                      </div>
+                      <div class="card-users">
+                        <div class="user user-3"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Ens Card -->
+                  <div class="add-card">Add Card</div>
+                </div>
+                <!-- Start List Content -->
+              </div>
+              <!-- End List -->
+              <!-- Start List -->
+              <div class="list">
+                <!-- Start List Content -->
+                <div class="list-content">
+                  <h5>Doing</h5>
+                  <!-- Start Card -->
+                  <div class="task">
+                    <!-- Start Prorges -->
+                    <div class="labels my-1">
+                      <div class="label label-blue"></div>
+                    </div>
+                    <!-- End Prorges -->
+                    <p> Client meeting </p>
+                    <div class="card-content">
+                      <div class="description">
+                        <svg height="10" viewBox="0 0 16 10" width="16" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="m1 0h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h8c.55228475 0 1 .44771525 1 1s-.44771525 1-1 1h-8c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1z"
+                            fill="#30364c" fill-rule="evenodd" opacity=".3"></path>
+                        </svg>
+                      </div>
+                      <div class="card-users">
+                        <div class="user user-1"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Ens Card -->
+                  <!-- Start Card -->
+                  <div class="task">
+                    <!-- Start Prorges -->
+                    <div class="labels my-1">
+                      <div class="label label-blue"></div>
+                    </div>
+                    <!-- End Prorges -->
+                    <p> Client meeting </p>
+                    <div class="card-content">
+                      <div class="description">
+                        <svg height="10" viewBox="0 0 16 10" width="16" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="m1 0h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h14c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1h-14c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm0 4h8c.55228475 0 1 .44771525 1 1s-.44771525 1-1 1h-8c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1z"
+                            fill="#30364c" fill-rule="evenodd" opacity=".3"></path>
+                        </svg>
+                      </div>
+                      <div class="card-users">
+                        <div class="user user-1"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Ens Card -->
+                  <div class="add-card">Add Card</div>
+                </div>
+                <!-- Start List Content -->
+              </div>
+            </div>
+            <!-- End List -->
+          </div>
+        </div>
+        <div class="col-md-5 order-md-1 text-center text-md-left">
+          <h3>Work with any team</h3>
+          <p>Whether it’s for work, a side project or even the next family vacation, Trello helps your team stay
+            organized.</p>
+          <button class="btn btn-secondary px-3" onclick="goToLogIn()">Start doing →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Collaborate -->
+  <!-- Start Teams -->
+  <div class="teams">
+    <div class="container py-5 pt-md-0">
+      <!-- Start Row one -->
+      <div class="row align-items-center">
+        <div class="col-lg-5 col-md-5 pt-5">
+          <div class="card-detail-window">
+            <header></header>
+            <div class="main">
+              <div class="window-header">
+                <span class="icon-lg icon-card"></span>
+                <div class="dummy-textblock dummy-textblock-lg"></div>
+                <div class="dummy-textblock dummy-textblock-sm"></div>
+              </div>
+              <div class="window-main-col col-8">
+                <div class="list-members">
+                  <h3>Members</h3>
+                  <div class="card-users">
+                    <div class="user user-2"></div>
+                  </div>
+                </div>
+                <div class="list-labels">
+                  <h3>Labels</h3>
+                  <div class="block-label">
+                    <div class="dummy-textblock dummy-textblock-md"></div>
+                  </div>
+                </div>
+                <div class="card-detail-desc col-12"> <span class="icon-lg icon-description"></span>
+                  <div class="block-desc">
+                    <div class="dummy-textblock dummy-textblock-sm"></div>
+                    <div class="dummy-textblock dummy-textblock-sm"></div>
+                  </div>
+                </div>
+                <div class="card-detail-activity col-12"> <span class="icon-lg icon-activity"></span>
+                  <h4>Activity</h4>
+                  <div class="block-activity">
+                    <div class="card-users">
+                      <div class="user user-3"></div>
+                    </div>
+                    <div class="block-comment">
+                      <div class="dummy-textblock dummy-textblock-sm"></div>
+                      <div class="dummy-textblock dummy-textblock-sm"></div>
+                      <div class="block-button"></div>
+                      <div class="block-actions"> <span class="icon-sm icon-attachment"></span> <span
+                          class="icon-sm icon-mention"></span> <span class="icon-sm icon-emoji"></span> <span
+                          class="icon-sm icon-card"></span> </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="window-sidebar col-4">
+                <h3>Suggested</h3>
+                <div class="button-link">
+                  <span class="icon-sm icon-member"></span>
+                  <p>Join</p>
+                </div>
+                <h3>Add to card</h3>
+                <div class="button-link"> <span class="icon-sm icon-member"></span>
+                  <p>Join</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-label"></span>
+                  <p>Label</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-checklist"></span>
+                  <p>Checklist</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-clock"></span>
+                  <p>Due Date</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-attachment"></span>
+                  <p>Attachment</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-card-cover"></span>
+                  <p>Cover</p>
+                </div>
+                <h3>Power-ups</h3>
+                <div class="button-link"> <span class="icon-sm icon-rocket"></span>
+                  <p>Butler</p>
+                </div>
+                <h3>Actions</h3>
+                <div class="button-link"> <span class="icon-sm icon-move"></span>
+                  <p>Move</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-subscribe"></span>
+                  <p>Watch</p>
+                </div>
+                <div class="button-link"> <span class="icon-sm icon-card"></span>
+                  <p>Make Template</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7 col-md-7">
+          <h3 class="mt-3 mt-md-0">Information at a glance</h3>
+          <p class="m-0">Dive into the details by adding comments, attachments, due dates, and more directly to Trello
+            cards. Collaborate on projects from beginning to end.</p>
+        </div>
+      </div>
+      <!-- End Row One -->
+      <!-- Start Row Two -->
+      <div class="row pt-5">
+        <div class="col-md-5 order-md-last">
+          <img class="img-fluid mb-3" src="images/butler.png" width="754" height="578">
+        </div>
+        <div class="col-md-7">
+          <h4> Built-In Workflow Automation With Butler </h4>
+          <div class="line my-4"></div>
+          <p> Let the robots do the work! Boost productivity by unleashing the power of automation across your entire
+            team with Butler, and remove tedious tasks from your to-do lists with: </p>
+          <ul>
+            <li>Rule-Based Triggers</li>
+            <li>Custom Card &amp; Board Buttons</li>
+            <li>Calendar Commands</li>
+            <li>Due Date Commands</li>
+          </ul>
+          <p></p>
+        </div>
+      </div>
+    </div>
+    <!-- End Row Two -->
+  </div>
+  <!-- End Teams -->
+  <!-- Start Slider  -->
+  <section class="slider">
+    <div class="container text-center">
+      <div class="row">
+        <h3>See how it works</h3>
+        <p>Go from idea to action in seconds with Trello’s intuitively simple boards, lists, and cards.</p>
+      </div>
+      <div id="carousel">
+        <a id="prev">
+          <svg height="40" viewBox="0 0 22 40" width="22">
+            <path
+              d="m4.31783602 20 16.88192488 16.8819248c.7133028.7133029.7133028 1.8697953 0 2.5830981-.7133029.7133028-1.8697953.7133028-2.5830981 0l-18.08168628-18.0816863c-.38000317-.3800032-.5575644-.8857877-.53268368-1.3833366-.02488072-.4975489.15268051-1.0033334.53268368-1.3833366l18.08168628-18.08168628c.7133028-.71330283 1.8697952-.71330283 2.5830981 0 .7133028.71330283.7133028 1.86979522 0 2.58309804z"
+              fill="#d9e4eb" transform="translate(.265262)"></path>
+          </svg>
+        </a>
+        <a id="next">
+          <svg height="40" viewBox="0 0 22 40" width="22">
+            <path
+              d="m4.31783662 20 16.88192488 16.8819248c.7133028.7133029.7133028 1.8697953 0 2.5830981-.7133029.7133028-1.8697953.7133028-2.5830981 0l-18.08168628-18.0816863c-.38000317-.3800032-.5575644-.8857877-.53268368-1.3833366-.02488072-.4975489.15268051-1.0033334.53268368-1.3833366l18.08168628-18.08168628c.7133028-.71330283 1.8697952-.71330283 2.5830981 0 .7133028.71330283.7133028 1.86979522 0 2.58309804z"
+              fill="#d9e4eb" fill-rule="evenodd" transform="matrix(-1 0 0 -1 21.734738 40)"></path>
+          </svg>
+        </a>
+        <div class="boards">
+          <div class="board active">
+            <img src="images/slider-1.JPG" alt="">
+            <p> Create a board for any project, give it a name, and invite your team. </p>
+          </div>
+          <div class="board">
+            <img src="images/slider-2.JPG" alt="">
+            <p> Add lists to create steps in a workflow that is right for you. </p>
+          </div>
+          <div class="board">
+            <img src="images/slider-3.JPG" alt="">
+            <p> Create cards for tasks to complete or information you want to organize. </p>
+          </div>
+          <div class="board">
+            <img src="images/slider-4.JPG" alt="">
+            <p> Click on a card to add details, due dates, checklists, comments, and more. </p>
+          </div>
+          <div class="board">
+            <img src="images/slider-5.JPG" alt="">
+            <p> Move them across lists to show progress. Go from "To Do" to "Done" in no time! </p>
+          </div>
+          <ul>
+            <li class="selcted"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Start Slider  -->
+  <!-- Start features -->
+  <section id="features">
+    <div class="container text-center py-5">
+      <div class="row">
+        <h3>See how it works</h3>
+        <p>Go from idea to action in seconds with Trello’s intuitively simple boards, lists, and cards.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="img img-collaborate"><img src="images/updated-layouts-collab.png" width="270" alt=""></div>
+          <h5>The Team Playbook</h5>
+          <p class="small">It’s easy to get your team up and running with Trello. We’ve collected all of the boards and
+            tools your team needs to succeed in one handy resource.</p>
+          <p><a class="btn btn-secondary btn-wrap px-3" href="https://trello.com/teams">Make A Game Plan</a></p>
+        </div>
+        <div class="col-lg-4">
+          <div class="img img-apps"><img src="images/updated-layouts-platform.png" width="270" alt=""></div>
+          <h5>A Productivity Platform</h5>
+          <p class="small">Integrate the apps your team already uses directly into your workflow. Power-Ups turn Trello
+            boards into living applications to meet your team's unique business needs.</p>
+          <p><a class="btn btn-secondary btn-wrap px-3" href="/power-ups">Power-Up Your Workflow</a></p>
+        </div>
+        <div class="col-lg-4">
+          <div class="img img-sync"><img src="images/updated-layouts-sync.png" width="270" alt=""></div>
+          <h5>Always In Sync</h5>
+          <p class="small">No matter where you are, Trello stays in sync across all of your devices. Collaborate with
+            your team anywhere, from sitting on the bus to sitting on the beach.</p>
+          <p class="app-store"> <a href="https://itunes.apple.com/app/trello-organize-anything/id461504587"><img
+                src="images/btn-appstore-black.png" class="img-fluid" alt="Available on the App Store"></a> <a
+              href="https://play.google.com/store/apps/details?id=com.trello"><img src="images/btn-playstore-black.png"
+                class="img-fluid" alt="Android App on Google Play"></a> </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End features -->
+  <!-- Start Footer -->
+  <div id="bottom-gradient">
+    <!-- Start Work Smarter -->
+    <section id="work-smarter">
+      <div class="container">
+        <div class="inner py-5 px-3 px-md-5 text-center text-white">
+          <h3>Work smarter with Trello</h3>
+          <p>Companies of all shapes and sizes use Trello.</p>
+          <div class="row justify-content-center mt-5">
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/4838c7256b43105d3abe0631ac1bb72c/logo-google.svg"
+                height="60" width="168" class="img-fluid mx-auto" alt="Google"> </div>
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/759e9aaacc706fd1f2d5f81b1a76b768/logo-fender.svg"
+                height="60" width="168" class="img-fluid mx-auto" alt="Fender"> </div>
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/0a48ad04e74b4ac85420dc6e8ae829bb/logo-squarespace.svg"
+                height="80" width="200" class="img-fluid mx-auto" alt="Squarespace"> </div>
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/ef0a1d5c99b0bee172d0d8ceee54c626/logo-costco.svg"
+                height="60" width="168" class="img-fluid mx-auto" alt="Costco"> </div>
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/02368db0db91ce9af0cd8aea3c54b395/logo-lush.svg"
+                height="60" width="168" class="img-fluid mx-auto" alt="Lush"> </div>
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/182d5e3e3d2acdd3c58f474ca6f01975/logo-pinterest.svg"
+                height="60" width="168" class="img-fluid mx-auto" alt="Pinterest"> </div>
+            <div class="col-sm-6 col-lg-3 mb-5 d-flex align-items-center"> <img
+                src="https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/7d2b54daf0b7fec914ec72dfe509fa88/logo-peloton.svg"
+                height="51" width="175" class="img-fluid mx-auto" alt="Peloton"> </div>
+          </div>
+          <p><a href="https://trello.com/business-class" class="btn btn-light px-3">Find out how →</a></p>
+        </div>
+      </div>
+    </section>
+    <!-- End Work Smarter -->
+    <!-- Start Get Started -->
+    <section id="get-started" class="d-flex align-items-center my-4">
+      <div class="container text-center py-6">
+        <div class="row">
+          <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 px-lg-5 pt-4">
+            <h3>Start Planning Today</h3>
+            <p>Sign up and join over 1,000,000 teams worldwide who are using Trello to get more done.</p> <a
+              href="Signup Page/signup.html" class="btn btn-success px-3">Get Started – It’s Free!</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Get Started -->
+  </div>
+  <div class="footer">
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Help</a></li>
+      <li><a href="#">Developers</a></li>
+    </ul>
+    <p>Created by : Mario Yunnan | Ahmed Elnewery | Mostafa Fathy</p>
+  </div>
+  <!-- End Footer -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="welcome.js"></script>
+</body>
+
+</html>
