@@ -68,7 +68,6 @@ $(document).ready(function () {
             userName: generateUserName(fullName),
             initial: initials(),
           };
-          console.log( user)
           //saving in localstoragw
           const currentUsers = JSON.parse(localStorage.getItem("users")) || [];
           const newUsers = [...currentUsers, user];

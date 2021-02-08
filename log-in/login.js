@@ -16,7 +16,6 @@ var mail = $("#email");
 var send = $("#signup-submit");
 
 
-console.log(newUsers);
 
 var isRegistered = false;
 
@@ -28,7 +27,6 @@ send.click(function (event) {
       if (user.email == mail.val()) {
         if (user.password == pass.val()) {
           localStorage.setItem("activeUserID", JSON.stringify(user.id))
-          console.log(user.id);
           isRegistered = true;
           location.replace("../index-page/homepage.html");
         }
