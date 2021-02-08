@@ -195,7 +195,7 @@ initializeBoardsList()
       id: generateId(10),
       title: todoName,
       listedIn: listName,
-      teamMembers: [],
+      // teamMembers: [],
       description: "",
       isDone: false,
     };
@@ -524,7 +524,7 @@ initializeBoardsList()
     {
       id: generateId(5),
       title: newBoardTitle,
-      boardMembers: [getData('activeUserID')],
+      // boardMembers: [getData('activeUserID')],
       todos:[],
       lists: [
         { id: generateId(5), listName: "todos", todos: [] },
