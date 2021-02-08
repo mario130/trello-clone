@@ -431,6 +431,7 @@ initializeBoardsList()
     renderList(boards[0].lists,boards[0].todos);
     renderTodos(boards[0].todos);
     initializeBoardsList()
+    colorTheBoard()
   }
   /*************          changes      ***************/
 
