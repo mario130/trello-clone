@@ -414,7 +414,7 @@ initializeBoardsList()
   // logout logic
   function logOut() {
     localStorage.removeItem("activeUserID");
-    location.assign("../../log-in/login.html");
+    location.assign("../log-in/login.html");
   }
   // delete local storage
   function deleteLocalStorage(){

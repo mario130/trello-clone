@@ -23,7 +23,7 @@
 	position: relative;
 }
 .new-board-modial .board-title{
-	background-color: blue;
+	background-color: rgb(31, 121, 191);
 	padding: 15px;
 	border-radius: 10px;
 	transition: all .4s;
