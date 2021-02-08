@@ -2,10 +2,11 @@ import {getData, saveData} from './modules/helper-functions.js'
 import {getDummyData, getBasicBoard} from './modules/testing-functions.js'
 import {renderList, renderTodos, colorTheBoard, initializeBoardsList, displayMembers} from './modules/rendering.js'
 import {activeModalTodoId} from './modules/bootstrap-functions.js'
-import {} from './modules/crud-operations.js'
+// import {} from './modules/crud-operations.js'
 
 import './modules/events.js'
 import './modules/crud-operations.js'
+// import './modules/initialization.js' //TODO!
 
 // detect if user passed login
 if (!(getData('activeUserID'))){
@@ -158,8 +159,28 @@ initializeBoardsList()
   })
   
   $("#add-board").click(function(){
-    var newBoardTitle = $("#titlenewbord").val();
 
+
+    let activeTeamIndex;
+    let teams = getData('teams');
+    let boards;
+    let currentActiveBoardIdx = getData('currentActiveBoardIdx');
+
+    for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
+      for (let member of teams[i].teamMembers){ //loop on team members
+        for (let user of getData('users')){     //loop on users to compare
+          
+          if (member === user.userName){ // match the team which has this user's id to get the team's boards
+          boards = teams[i].boards
+          const activeTeamId = teams[i].id
+          activeTeamIndex = i
+          }
+        }
+      }
+    }
+    
+    
+    var newBoardTitle = $("#titlenewbord").val();
     teams[activeTeamIndex].boards.forEach(board => {
       if (board.title === newBoardTitle) {
         alert('board already present')
@@ -281,6 +302,30 @@ $('#delete-board').click(function(){
   deleteBoard()
 })
 function deleteBoard(){
+
+
+  let activeTeamIndex;
+  let teams = getData('teams');
+  let boards;
+  let currentActiveBoardIdx = getData('currentActiveBoardIdx');
+
+
+
+  for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
+    for (let member of teams[i].teamMembers){ //loop on team members
+      for (let user of getData('users')){     //loop on users to compare
+        
+        if (member === user.userName){ // match the team which has this user's id to get the team's boards
+        boards = teams[i].boards
+        const activeTeamId = teams[i].id
+        activeTeamIndex = i
+        }
+      }
+    }
+  }
+
+
+  
   if (teams[activeTeamIndex].boards.length < 2) {
     alert('There\'s no boards left except this one')
     throw 'no boards left'

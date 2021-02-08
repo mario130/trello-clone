@@ -127,7 +127,6 @@ function deleteAllLists() {
 
 
 
-    console.log(teams);
     for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
       for (let member of teams[i].teamMembers){ //loop on team members
         for (let user of getData('users')){     //loop on users to compare
