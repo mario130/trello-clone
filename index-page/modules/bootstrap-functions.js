@@ -1,6 +1,6 @@
 import {saveData, getData} from './helper-functions.js'
 import {draggingInProgress} from './jQueryUI.js'
-import {boards} from '../homepage.js'
+import {boards} from './initialization.js'
 
 export let activeModalTodoId;
 let selectedTodo;
