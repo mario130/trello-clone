@@ -106,7 +106,15 @@ font-weight: bold;
 box-shadow: rgb(0 0 0 / 20%) 1px 1px 5px 0;
 border-color: transparent;
 margin-bottom: 16px;
-
+}
+.login-btn img{
+  max-width: 18px;
+  max-height: 18px;
+}
+.login-btn input {
+  border: none;
+  outline: none;
+  background: transparent;
 }
 .bottom-form-link {
   text-align: center;
