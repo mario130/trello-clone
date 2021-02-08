@@ -10,7 +10,6 @@ var selectedBoard = selectedBoard ? selectedBoard : "Board 1";
 var teams = getData('teams')
 export let boards;
 export let activeTeamIndex = getData('activeTeamIndex');
-console.log(activeTeamIndex);
 let selectedTodo;
 
 // save active team index
@@ -105,7 +104,6 @@ initializeBoardsList()
   $('#slid-menu').on('click', '.boardLink', function(){
 
     let idx = this.dataset.board
-    console.log(idx);
   
   
     let activeTeamIndex;

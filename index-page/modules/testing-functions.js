@@ -77,7 +77,7 @@ export function getDummyData(){
   users.then(res => res.json()).then(res => {
     saveData('users', res)
   })
-  // .then(()=>location.reload())
+  .then(()=>location.reload())
 
   saveData('activeUserID', "_NekmV__*u@c#C$&X4JfR")
   saveData('currentActiveBoardIdx', 0)
