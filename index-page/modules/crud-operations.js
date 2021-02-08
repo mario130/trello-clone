@@ -1,6 +1,5 @@
 import {getData, saveData} from './helper-functions.js'
 import {renderList, renderTodos} from './rendering.js'
-import {activateListDeletion} from '../homepage.js'
 
 let activeTeamIndex;
 let teams = getData('teams');
@@ -83,7 +82,6 @@ $("#addlistBtn").click(function () {
   $(".new-list").hide();
   $("#addAnotherList").fadeIn();
   // console.log(boards);
-  activateListDeletion()
 });
 
 // delete list
@@ -112,7 +110,6 @@ export function deleteList(that){
       // console.log('deleted');
     }
   }
-  activateListDeletion()
 }
 
 //click on add-card-btn and adding todo in

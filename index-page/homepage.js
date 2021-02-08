@@ -2,7 +2,7 @@ import {getData, saveData} from './modules/helper-functions.js'
 import {getDummyData, getBasicBoard} from './modules/testing-functions.js'
 import {renderList, renderTodos, colorTheBoard, initializeBoardsList, displayMembers} from './modules/rendering.js'
 import {activeModalTodoId} from './modules/bootstrap-functions.js'
-import {deleteList} from './modules/crud-operations.js'
+import {} from './modules/crud-operations.js'
 
 import './modules/events.js'
 import './modules/crud-operations.js'
@@ -84,17 +84,7 @@ initializeBoardsList()
     $(".new-list").hide();
     $("#addAnotherList").fadeIn();
   })
-  // delete list
-  // $('.delete-list').click(function(this){
-  //   console.log(this);
-  //   // deleteList(this)
-  // })
-  export function activateListDeletion(){
-    $('.delete-list').bind('click', function(){
-      deleteList(this)
-    })
-  }
-  activateListDeletion()
+  
   /***************************************************************** */
   
   // DRAG N DROP
@@ -228,7 +218,32 @@ for (let i = 0; i< users.length; i++){
   }
 }
 
-function switchBoard(idx){
+
+$('#slid-menu').on('click', '.boardLink', function(){
+
+  let idx = this.dataset.board
+  console.log(idx);
+
+
+  let activeTeamIndex;
+  let teams = getData('teams')
+  let boards;
+  let currentActiveBoardIdx = getData('currentActiveBoardIdx')
+
+  for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
+    for (let member of teams[i].teamMembers){ //loop on team members
+      for (let user of getData('users')){     //loop on users to compare
+        
+        if (member === user.userName){ // match the team which has this user's id to get the team's boards
+        boards = teams[i].boards
+        const activeTeamId = teams[i].id
+        activeTeamIndex = i
+        }
+      }
+    }
+  }
+  
+
   currentActiveBoardIdx = idx;
   saveData('currentActiveBoardIdx', currentActiveBoardIdx);
   renderList(boards[idx].lists,boards[idx].todos);
@@ -238,7 +253,7 @@ function switchBoard(idx){
   $(".currentBoardName").text(boards[idx].title)
   $("#board-name").text(boards[idx].title)
   colorTheBoard()
-}
+})
 
 $('#get-dummy-data').click(function(){
   getDummyData()

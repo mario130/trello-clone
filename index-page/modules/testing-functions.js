@@ -34,6 +34,7 @@ teams[activeTeamIndex].boards[0].lists = []
 
   initializeBoardsList()
   colorTheBoard()
+  $('#slid-menu').slideUp()
 }
 
 export function createBasicBoard(){
@@ -70,6 +71,7 @@ export function getDummyData(){
     $('.currentBoardName').html('Board 1')
     boards = res[0].boards
     initializeBoardsList()
+    colorTheBoard()
   })
   
   users.then(res => res.json()).then(res => {
@@ -80,6 +82,5 @@ export function getDummyData(){
   saveData('activeUserID', "_NekmV__*u@c#C$&X4JfR")
   saveData('currentActiveBoardIdx', 0)
 
-  colorTheBoard()
-
+  $('#slid-menu').slideUp()
 }

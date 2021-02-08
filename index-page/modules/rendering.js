@@ -1,6 +1,7 @@
 import {saveData, getData} from './helper-functions.js'
 import {makeTodosDraggable} from './jQueryUI.js'
 import {activateMmodals} from './bootstrap-functions.js'
+import {deleteList} from './crud-operations.js'
 
 
 let activeTeamIndex;
@@ -63,6 +64,13 @@ function deleteAllLists() {
     // console.log(boards);
     $('.currentBoardName').html(boards[currentActiveBoardIdx].title)
     renderTodos(todos)
+    activateListDeletion()
+  }
+
+  function activateListDeletion(){
+    $('.delete-list').bind('click', function(){
+      deleteList(this)
+    })
   }
 
   /******************* conponents ******************************* */
@@ -111,18 +119,61 @@ function deleteAllLists() {
   }
 
   export function colorTheBoard(){
-    var currentActiveBoardIdx = getData('currentActiveBoardIdx')
+
+    let activeTeamIndex;
+    let teams = getData('teams');
+    let boards;
+    let currentActiveBoardIdx = getData('currentActiveBoardIdx');
+
+
+
+    console.log(teams);
+    for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
+      for (let member of teams[i].teamMembers){ //loop on team members
+        for (let user of getData('users')){     //loop on users to compare
+          
+          if (member === user.userName){ // match the team which has this user's id to get the team's boards
+          boards = teams[i].boards
+          const activeTeamId = teams[i].id
+          activeTeamIndex = i
+          }
+        }
+      }
+    }
+    
     $('.bar-1').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
     $('.bar-2').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
     $('.slid-menu-board').css({'background-color': teams[activeTeamIndex].boards[currentActiveBoardIdx].bgColor})
-  
+
   }
 
   // boards dropdown
   export function initializeBoardsList(){
+
+
+
+    let activeTeamIndex;
+      let teams = getData('teams');
+      let boards;
+      let currentActiveBoardIdx = getData('currentActiveBoardIdx');
+
+
+
+      for (let i = 0; i < teams.length; i++){     //loop on teams (used normal loop to get team index from i)
+        for (let member of teams[i].teamMembers){ //loop on team members
+          for (let user of getData('users')){     //loop on users to compare
+            
+            if (member === user.userName){ // match the team which has this user's id to get the team's boards
+            boards = teams[i].boards
+            }
+          }
+        }
+      }
+    
+    
     $('.boardLink').parent().remove()
     for (let i = 0; i < boards.length; i++){
-      let boardLink = $(`<div class="slid-board"><button class="boardLink" onclick="switchBoard(${i})">${boards[i].title}</button></div>`);
+      let boardLink = $(`<div class="slid-board"><button class="boardLink" data-board="${i}" >${boards[i].title}</button></div>`);
       $('.create-new-board').before(boardLink)
     }
   }
