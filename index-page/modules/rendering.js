@@ -133,6 +133,7 @@ export function initializeBoardsList() {
 // display team members
 import { activeTeamIndex, teams } from "./getActiveTeamIdx.js";
 export function displayMembers() {
+	let activeTeamIndex = getData('activeTeamIndex')
 	var users = getData("users");
 	for (let member of teams[activeTeamIndex].teamMembers) {
 		for (let user of users) {

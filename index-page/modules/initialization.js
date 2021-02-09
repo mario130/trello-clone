@@ -17,23 +17,38 @@ var teams = getData("teams");
 export let boards;
 export let activeTeamIndex = getData("activeTeamIndex");
 let selectedTodo;
+let activeUserName;
+
+let activeUserId = getData('activeUserID')
+let users = getData('users')
+
+if (!activeTeamIndex){
+	for (let i = 0; i < users.length; i++){
+		if (users[i].id === activeUserId){
+			activeUserName = users[i].userName
+			saveData('activeUserName', activeUserName)
+		}
+	}
+	
+	for (let i = 0; i < teams.length; i++){
+		for(let j=0; j < teams[i].teamMembers.length; j++){
+			if (teams[i].teamMembers[j] === activeUserName){
+				activeTeamIndex = i
+				saveData('activeTeamIndex', activeTeamIndex)
+			}
+		}
+	}
+}
+
 
 // save active team index
-if (!activeTeamIndex) {
-	for (let i = 0; i < teams.length; i++) {
-		//loop on teams (used normal loop to get team index from i)
-		for (let member of teams[i].teamMembers) {
-			//loop on team members
-			for (let user of getData("users")) {
-				//loop on users to compare
-
-				if (member === user.userName) {
-					// match the team which has this user's id to get the team's boards
-					boards = teams[i].boards;
-					activeTeamIndex = i;
-					saveData("activeTeamIndex", activeTeamIndex);
-				}
-			}
+for (let i = 0; i < teams.length; i++) {
+	//loop on teams (used normal loop to get team index from i)
+	for (let member of teams[i].teamMembers) {
+		//loop on users to compare
+		if (member === activeUserName) {
+			// match the team which has this user's id to get the team's boards
+			boards = teams[i].boards;
 		}
 	}
 }

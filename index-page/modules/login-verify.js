@@ -2,14 +2,15 @@ import { getData } from "./helper-functions.js";
 
 // detect if user passed login
 if (!getData("activeUserID")) {
-	document.location.href = "/log-in/login.html";
+	document.location.href = "../log-in/login.html";
+	localStorage.removeItem('activeTeamIndex')
 }
 
 // logout logic
 function logOut() {
 	localStorage.removeItem("activeUserID");
 	localStorage.removeItem("activeTeamIndex");
-	location.assign("../../welcome-page/welcome.html");
+	location.assign("../welcome-page/welcome.html");
 }
 $("#log-out").click(function () {
 	logOut();
