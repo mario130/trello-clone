@@ -506,6 +506,9 @@
 	}
 }
 @media screen and (max-width: 608px) {
+	#listItems {
+		width: 100%;
+	}
 	.card-wrapper {
 		width: 100%;
 	}

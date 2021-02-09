@@ -201,9 +201,9 @@ $("#add-board").click(function () {
 			title: newBoardTitle,
 			todos: [],
 			lists: [
-				{ id: generateId(5), listName: "todos", todos: [] },
-				{ id: generateId(5), listName: "doing", todos: [] },
-				{ id: generateId(5), listName: "done", todos: [] },
+				// { id: generateId(5), listName: "Todos", todos: [] },
+				// { id: generateId(5), listName: "Currently", todos: [] },
+				// { id: generateId(5), listName: "For later", todos: [] },
 			],
 			creatorID: getData("activeUserID"),
 			bgColor: $(".board-title").css("background-color"),

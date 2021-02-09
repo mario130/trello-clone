@@ -19,23 +19,21 @@ export let activeTeamIndex = getData("activeTeamIndex");
 let selectedTodo;
 let activeUserName;
 
-let activeUserId = getData('activeUserID')
+let activeUserID = getData('activeUserID')
 let users = getData('users')
 
-if (!activeTeamIndex){
-	for (let i = 0; i < users.length; i++){
-		if (users[i].id === activeUserId){
-			activeUserName = users[i].userName
-			saveData('activeUserName', activeUserName)
-		}
+for (let i = 0; i < users.length; i++){
+	if (users[i].id === activeUserID){
+		activeUserName = users[i].userName
+		saveData('activeUserName', activeUserName)
 	}
-	
-	for (let i = 0; i < teams.length; i++){
-		for(let j=0; j < teams[i].teamMembers.length; j++){
-			if (teams[i].teamMembers[j] === activeUserName){
-				activeTeamIndex = i
-				saveData('activeTeamIndex', activeTeamIndex)
-			}
+}
+
+for (let i = 0; i < teams.length; i++){
+	for(let j=0; j < teams[i].teamMembers.length; j++){
+		if (teams[i].teamMembers[j] === activeUserName){
+			activeTeamIndex = i
+			saveData('activeTeamIndex', activeTeamIndex)
 		}
 	}
 }

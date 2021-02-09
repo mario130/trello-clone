@@ -58,9 +58,9 @@ $("#createTeam").on("submit", function (e) {
             todoboardMembers: [getData('activeUserID')],
             todos: [],
             lists: [
-              { id: generateId(5), listName: "todos", todos: [] },
-              { id: generateId(5), listName: "doing", todos: [] },
-              { id: generateId(5), listName: "done", todos: [] },
+              // { id: generateId(5), listName: "todos", todos: [] },
+              // { id: generateId(5), listName: "doing", todos: [] },
+              // { id: generateId(5), listName: "done", todos: [] },
             ],
             creatorID: getData('activeUserID'),
             bgColor: '#1f79bf'

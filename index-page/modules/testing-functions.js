@@ -53,9 +53,9 @@ export function createBasicBoard() {
 			boardMembers: [getData("activeUserID")],
 			todos: [],
 			lists: [
-				{ id: generateId(5), listName: "todos", todos: [] },
-				{ id: generateId(5), listName: "doing", todos: [] },
-				{ id: generateId(5), listName: "done", todos: [] },
+				{ id: generateId(5), listName: "Todos", todos: [] },
+				{ id: generateId(5), listName: "Currently", todos: [] },
+				{ id: generateId(5), listName: "For later", todos: [] },
 			],
 			creatorID: getData("activeUserID"),
 			bgColor: "#1f79bf",
@@ -94,7 +94,7 @@ export function getDummyData() {
 		})
 		.then(() => location.reload());
 
-	saveData("activeUserID", "_NekmV__*u@c#C$&X4JfR");
+	saveData("activeUserID", "_N71VQIuU8uugrViEa2VQ");
 	saveData("currentActiveBoardIdx", 0);
 
 	$("#slid-menu").slideUp();
