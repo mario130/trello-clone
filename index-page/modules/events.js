@@ -33,8 +33,15 @@ $(document.body).keydown(function (e) {
 		$("#addAnotherList").fadeIn();
 		$("#board-modai").fadeOut();
 		$("#slid-menu").slideUp();
+	} else if (e.keyCode == 18){
+		$('.test-btn').show()
 	}
 });
+$(document.body).keyup(function(e){
+	if (e.keyCode === 18){
+		$('.test-btn').hide()
+	}
+})
 
 // detecting clicks outside lists to close the card composer
 $(document.body).click(function (ev) {

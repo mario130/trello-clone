@@ -227,7 +227,8 @@
 }
 .test-btn{
 	border: 1px solid gainsboro;
-	background: #e76f51
+	background: #e76f51;
+	display: none;
 }
 .test-btn:hover{
 	background: #e65632
