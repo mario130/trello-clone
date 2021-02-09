@@ -161,13 +161,13 @@ header nav div a.sig-up:hover {
   background-size: contain;
 }
 .collaborate .user-1 {
-  background-image: url('images/user-1.png');
+  background-image: url('../images/user-1.png');
 }
 .collaborate .user-2 {
-  background-image: url('images/user-2.png');
+  background-image: url('../images/user-2.png');
 }
 .collaborate .user-3 {
-  background-image: url('images/user-3.png');
+  background-image: url('../images/user-3.png');
 }
 .add-card {
   color: #aaa;
@@ -216,7 +216,7 @@ header nav div a.sig-up:hover {
   top: 0;
 }
 .window-header .icon-card {
-  background-image: url('images/icon-card.svg');
+  background-image: url('../images/icon-card.svg');
 }
 .card-detail-window .main .window-header .dummy-textblock-lg {
   max-width: 204px;
@@ -266,7 +266,7 @@ header nav div a.sig-up:hover {
   width: 22px;
 }
 .card-detail-window .user.user-2 {
-  background-image: url('images/user-2.png');
+  background-image: url('../images/user-2.png');
 }
 .card-detail-window .main .window-main-col .list-labels .block-label {
   background-color: #00c7e6;
@@ -298,7 +298,7 @@ header nav div a.sig-up:hover {
   width: 52px;
 }
 .card-detail-window .icon-description {
-  background-image: url('images/icon-description.svg');
+  background-image: url('../images/icon-description.svg');
 }
 .card-detail-window .main .window-main-col .card-detail-desc .block-desc .dummy-textblock:last-child {
   max-width: 175px;
@@ -310,13 +310,13 @@ header nav div a.sig-up:hover {
   width: 100%;
 }
 .card-detail-window .icon-activity {
-  background-image: url('images/icon-activity.svg');
+  background-image: url('../images/icon-activity.svg');
 }
 .card-detail-window .main .window-main-col .card-detail-activity .block-activity {
   margin-left: -28px;
 }
 .card-detail-window .user.user-3 {
-  background-image: url('images/user-3.png');
+  background-image: url('../images/user-3.png');
 }
 .card-detail-window .user {
   background-repeat: no-repeat;
@@ -362,16 +362,16 @@ header nav div a.sig-up:hover {
   width: 8px;
 }
 .card-detail-window .icon-attachment {
-  background-image: url('images/icon-attachment.svg');
+  background-image: url('../images/icon-attachment.svg');
 }
 .card-detail-window .icon-mention {
-  background-image: url('images/icon-mention.svg');
+  background-image: url('../images/icon-mention.svg');
 }
 .card-detail-window .icon-emoji {
-  background-image: url('images/icon-emoji.svg');
+  background-image: url('../images/icon-emoji.svg');
 }
 .card-detail-window .icon-card {
-  background-image: url('images/icon-card.svg');
+  background-image: url('../images/icon-card.svg');
 }
   /* Start  .window-sidebar */
 .card-detail-window .main .window-sidebar {
@@ -401,7 +401,7 @@ header nav div a.sig-up:hover {
   padding: 5px 0 5px 9px;
 }
 .card-detail-window .icon-member {
-  background-image: url('images/icon-member.svg');
+  background-image: url('../images/icon-member.svg');
 }
 .card-detail-window .main .window-sidebar p {
   font-size: 8px;
@@ -410,25 +410,25 @@ header nav div a.sig-up:hover {
   padding-left: 7px;
 }
 .card-detail-window .icon-label {
-  background-image: url('images/icon-label.svg');
+  background-image: url('../images/icon-label.svg');
 }
 .card-detail-window .icon-checklist {
-  background-image: url('images/icon-checklist.svg');
+  background-image: url('../images/icon-checklist.svg');
 }
 .card-detail-window .icon-clock {
-  background-image: url('images/icon-clock.svg');
+  background-image: url('../images/icon-clock.svg');
 }
 .card-detail-window .icon-card-cover {
-  background-image: url('images/icon-card-cover.svg');
+  background-image: url('../images/icon-card-cover.svg');
 }
 .card-detail-window .icon-rocket {
-  background-image: url('images/icon-rocket.svg');
+  background-image: url('../images/icon-rocket.svg');
 }
 .card-detail-window .icon-move {
-  background-image: url('images/icon-move.svg');
+  background-image: url('../images/icon-move.svg');
 }
 .card-detail-window .icon-subscribe {
-  background-image: url('images/icon-subscribe.svg');
+  background-image: url('../images/icon-subscribe.svg');
 }
 /* End Teams */
 
@@ -609,7 +609,7 @@ header nav div a.sig-up:hover {
 
 @media (min-width: 768px){
   #get-started {
-      background-image: url('images/trellians-2x-2.png');
+      background-image: url('../images/trellians-2x-2.png');
       background-position: center;
       background-repeat: no-repeat;
       background-size: 1332px 393px;
