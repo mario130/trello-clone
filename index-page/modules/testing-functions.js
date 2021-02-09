@@ -34,10 +34,6 @@ export function getBasicBoard() {
 	teams[activeTeamIndex].boards[0].todos = [];
 
 	createBasicBoard();
-	saveData("teams", teams);
-
-	renderList(boards[0].lists, boards[0].todos);
-	renderTodos(boards[0].todos);
 
 	initializeBoardsList();
 	colorTheBoard();
@@ -45,7 +41,12 @@ export function getBasicBoard() {
 }
 
 export function createBasicBoard() {
-	boards = [
+
+	let teams = getData("teams");
+	let activeTeamIndex = getData('activeTeamIndex');
+	let currentActiveBoardIdx;
+	
+	let boards = [
 		{
 			id: generateId(5),
 			title: "Board 1",
@@ -60,10 +61,15 @@ export function createBasicBoard() {
 			bgColor: "#1f79bf",
 		},
 	];
+	
 	teams[activeTeamIndex].boards = boards;
-	saveData("teams", teams);
 	currentActiveBoardIdx = 0;
+
+	saveData("teams", teams);
 	saveData("currentActiveBoardIdx", currentActiveBoardIdx);
+
+	renderList(boards[0].lists, boards[0].todos);
+	renderTodos(boards[0].todos);
 }
 
 export function getDummyData() {
