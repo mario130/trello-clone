@@ -99,9 +99,30 @@ $("#save-description").click(function () {
 	saveDescription(this);
 });
 function saveDescription(ev) {
+
+	let teams = getData("teams");
+	let boards;
+	let currentActiveBoardIdx = getData("currentActiveBoardIdx");
+
+	for (let i = 0; i < teams.length; i++) {
+		//loop on teams (used normal loop to get team index from i)
+		for (let member of teams[i].teamMembers) {
+			//loop on team members
+			for (let user of getData("users")) {
+				//loop on users to compare
+				if (member === user.userName) {
+					// match the team which has this user's id to get the team's boards
+					boards = teams[i].boards;
+				}
+			}
+		}
+	}
+	
 	boards[currentActiveBoardIdx].todos.map((todo) => {
 		if (todo.id === activeModalTodoId) {
 			todo.description = $($(ev).parent().prev()[0]).find("#desc").val();
+			// $("#desc").html(" ");
+			$('#desc').val("")
 			saveData("teams", teams);
 			renderTodos(boards[currentActiveBoardIdx].todos);
 		}

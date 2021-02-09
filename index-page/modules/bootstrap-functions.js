@@ -37,12 +37,15 @@ export function activateMmodals() {
 		todos.forEach((todo) => {
 			if (todo.id === chosenId) {
 				chosenTodo.push(todo);
+				// $("#desc").html(chosenTodo[0].description);
+				
+				
+				$('#desc').attr('placeholder', chosenTodo[0].description)
 			}
 		});
 
 		// fill todo description
-		$("#desc").html("");
-		$("#desc").html(chosenTodo[0].description);
+		
 
 		// get current user full name
 		var activeUserId = getData("activeUserID");
