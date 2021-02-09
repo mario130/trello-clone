@@ -235,3 +235,9 @@ margin-bottom: 16px;
   text-decoration: underline;
   color: blue;
 }
+
+@media screen and (max-width:768px) {
+  body {
+    background-image: none;
+  }
+}

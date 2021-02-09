@@ -639,4 +639,7 @@ header nav div a.sig-up:hover {
     margin-top: 20px;
     width: 376px;
   }
+  .slider {
+    display: none;
+  }
 }

@@ -39,12 +39,13 @@ body{
   }
   
   @media  (max-width:700px) {
+    body {
+      background-image: none;
+    }
     .team-form  {
         max-width: 80%;
     }
-    .background{
-        display: none;
-    }
+    
   }
   .team-form .heading {
   text-align: center;
@@ -138,4 +139,10 @@ body{
   .footer ul li a:hover {
     text-decoration: underline;
     color: blue;
+  }
+
+  @media (max-width:400px) {
+    .team-form {
+      max-width: 300px;
+    }
   }
