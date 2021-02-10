@@ -58,5 +58,10 @@ $(document.body).click(function (ev) {
 
 		$(".new-list").hide();
 		$("#addAnotherList").fadeIn();
+	} else if(ev.target.classList.contains("container-new-board")){
+		$("#board-modai").fadeOut();
+		$(".bar-2, .bar-1").css({
+			"filter": "blur(0)"
+		})
 	}
 });
