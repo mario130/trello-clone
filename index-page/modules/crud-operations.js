@@ -224,6 +224,9 @@ $("#add-board").click(function () {
 	} else {
 		alert("Please enter the board title");
 	}
+	$(".bar-2, .bar-1").css({
+		"filter": "blur(0)"
+	})
 });
 
 var userImg = $(".userImg");

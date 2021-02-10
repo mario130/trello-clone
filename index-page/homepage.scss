@@ -1,6 +1,10 @@
 * {
 	font-family: "Ubuntu", sans-serif;
 }
+@function fastTransition(){
+  @return all .4s;
+}
+
 /* Start Modials Boads */
 .container-new-board {
 	position: fixed;
@@ -14,80 +18,76 @@
 	justify-content: center;
 	align-items: center;
 	display: none;
-}
-.new-board-modial {
-	width: 350px;
-	height: 250px;
-	padding: 30px;
-	color: #fff;
-	position: relative;
-}
-.new-board-modial .board-title{
-	background-color: rgb(31, 121, 191);
-	padding: 15px;
-	border-radius: 10px;
-	transition: all .4s;
-}
-.new-board-modial .board-title input{
-	background-color: #00000024;
-	border: none;
-	outline: none;
-	color: white;
-	padding: 5px 8px;
-	border-radius: 6px;
-}
-.new-board-modial .board-title input::placeholder {
-	color: rgb(228, 228, 228);
-}
-.new-board-modial .board-style {
-	padding: 10px 0px 10px 10px;
-	display: flex;
-}
-.new-board-modial ul {
-	list-style: none;
-	padding-left: 0;
-	margin-left: 20px;
-}
-.new-board-modial ul li {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	background-color: blue;
-	cursor: pointer;
-	border-radius: 6px;
-}
-/* .new-board-modial ul li.red {
-	background-color: red;
-}
-.new-board-modial ul li.blue {
-	background-color: blue;
-}
-.new-board-modial ul li.orange {
-	background-color: orange;
-}
-.new-board-modial ul li.purple {
-	background-color: purple;
-} */
-.new-board-modial button.close-modial{
-	background-color: transparent;
-	position: absolute;
-	top: 40px;
-	right: 40px;
-	border: none;
-	color: white;
 
-}
-.new-board-modial button.add-board {
-	background-color: green;
-	border: none;
-	outline: none;
-	color: white;
-	padding: 8px 8px;
-	border-radius: 5px;
-	margin-left: 10px;
-	cursor: pointer;
+  .new-board-modial {
+    width: 350px;
+    height: 250px;
+    padding: 30px;
+    color: #fff;
+    position: relative;
 
+    .board-title{
+      background-color: rgb(31, 121, 191);
+      padding: 15px;
+      border-radius: 10px;
+      transition: fastTransition();
+
+      input{
+        background-color: #00000024;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 5px 8px;
+        border-radius: 6px;
+        
+        &::placeholder {
+          color: rgb(228, 228, 228);
+        }
+      }
+    }
+
+    .board-style {
+      padding: 10px 0px 10px 10px;
+      display: flex;
+    }
+
+    
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-left: 20px;
+
+      li {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background-color: blue;
+        cursor: pointer;
+        border-radius: 6px;
+      }
+    }
+    button.close-modial{
+      background-color: transparent;
+      position: absolute;
+      top: 40px;
+      right: 40px;
+      border: none;
+      color: white;
+    }
+    button.add-board {
+      background-color: green;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 8px 8px;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
 }
+
+
 /* Start Slid Menu */
 .slid-menu-board {
 	position: absolute;
@@ -123,7 +123,7 @@
 	color: white;
 	width: 100%;
 	text-align: left;
-	transition: all .4s;
+	transition: fastTransition();
 }
 .close-slid-menu {
 	position: absolute;
@@ -172,7 +172,7 @@
 	box-shadow: none;
 	color: #fff;
 	height: 30px;
-	transition: all .4s ease-out;
+	transition: fastTransition() ease-out;
 }
 .bar-1-btn:focus,
 .bar-2-btn:focus{
@@ -258,7 +258,7 @@
 	font-weight: 600;
 	display: inline-block;
 	margin-left: 5px;
-	transition: all .4s;
+	transition: fastTransition();
 	cursor: pointer;
 	overflow: hidden;
 }

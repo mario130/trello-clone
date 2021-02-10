@@ -134,9 +134,12 @@ $("#open-slid-menu").click(function () {
 $(".close-slid-menu").click(function () {
 	$("#slid-menu").slideUp();
 });
-$("#open-board-modail").click(function () {
+$(".open-board-modail").click(function () {
 	$("#board-modai").css("display", "flex");
 	$("#titlenewbord").focus();
+	$(".bar-2, .bar-1").css({
+		"filter": "blur(3px)"
+	})
 });
 $("#slid-menu").on("click", ".boardLink", function () {
 	let idx = this.dataset.board;
@@ -175,6 +178,9 @@ $(".clr").each(function (idx, val) {
 });
 $(".close-modial").click(function () {
 	$("#board-modai").fadeOut();
+	$(".bar-2, .bar-1").css({
+		"filter": "blur(0)"
+	})
 });
 var lisColor = $(".board-style li");
 lisColor.click(function () {
