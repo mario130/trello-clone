@@ -65,3 +65,9 @@ $(document.body).click(function (ev) {
 		})
 	}
 });
+
+$('#titlenewbord').on('keyup', function(e){
+	if (e.keyCode === 13){
+		$('#add-board').click()
+	}
+})

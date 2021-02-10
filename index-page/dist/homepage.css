@@ -533,6 +533,9 @@
 .new-list {
   display: none;
 }
+.new-list input {
+  margin-bottom: 8px;
+}
 .new-list .add-card-actions svg {
   font-size: 20px;
   font-weight: 700;
