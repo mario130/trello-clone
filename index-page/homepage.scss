@@ -201,48 +201,19 @@
 	display: flex;
 	align-items: center;
 }
-.btn-text,
-.svg-search {
+.btn-text{
 	position: relative;
 	bottom: 3px;
 }
-.svg-search {
-	right: 30px;
-	height: 100%;
-	bottom: 5px;
-}
-
-.bar-1-search {
-	background-color: hsla(0, 0%, 100%, 0.3);
-	border-radius: 3px;
-	border: none;
-	box-shadow: none;
-	box-sizing: border-box;
-	color: #fff;
-	height: 30px;
-	line-height: 19px;
-	margin: 0;
-	outline: none;
-	padding-left: 8px;
-	padding-right: 30px;
-	transition: width 0.15s;
-	width: 184px;
-	position: relative;
-	bottom: 5px;
-
-  @media screen and (max-width: 882px) {
-    display: none;
-  }
-}
-@media screen and (max-width: 882px) {
-	#searchIcon {
-		display: none;
-	}
+.testing-btns{
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  display: none;
 }
 .test-btn{
 	border: 1px solid gainsboro;
 	background: #e76f51;
-	display: none;
 
   &:hover{
     background: #e65632

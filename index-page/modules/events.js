@@ -34,12 +34,12 @@ $(document.body).keydown(function (e) {
 		$("#board-modai").fadeOut();
 		$("#slid-menu").slideUp();
 	} else if (e.keyCode == 18){
-		$('.test-btn').show()
+		$('.testing-btns').slideDown()
 	}
 });
 $(document.body).keyup(function(e){
 	if (e.keyCode === 18){
-		$('.test-btn').hide()
+		$('.testing-btns').slideUp()
 	}
 })
 
