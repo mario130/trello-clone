@@ -56,5 +56,5 @@ $(".slider li").each(function (index) {
 })
 
 function goToLogIn() {
-  document.location.href = "Signup%20Page/signup.html";
+  document.location.href = "/Signup%20Page/signup.html";
 }
