@@ -1,8 +1,13 @@
 body{
   background: url("../images/signup-images/left.svg") left 100% no-repeat, url("../images/signup-images/right.svg") right 100% no-repeat;
   background-attachment: fixed;
-background-size: 25%;
-background-color: aliceblue;
+  background-size: 25%;
+  background-color: aliceblue;
+}
+@media screen and (max-width:768px){
+  body{
+    background-image: none;
+  }
 }
 
 .trello-logo{
