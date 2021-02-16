@@ -1,6 +1,8 @@
 # Trello Clone
 
-![img](https://icons-for-free.com/iconfiles/png/512/cards+kanban+management+project+tasks+trello+icon-1320165725577116630.png)
+![Trello gif](https://im.ezgif.com/tmp/ezgif-1-003f6b8878fb.gif)
+
+
 
 > Trello is a collaboration tool that organizes your projects into boards. In one glance, Trello tells you what's being worked on, who's working on what, and where something is in a process.
 
