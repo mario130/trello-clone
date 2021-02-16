@@ -1,6 +1,6 @@
 # Trello Clone
 
-![Trello gif](https://im.ezgif.com/tmp/ezgif-1-003f6b8878fb.gif)
+![Trello gif](/images/trello.gif)
 
 
 
