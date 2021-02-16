@@ -23,17 +23,18 @@
 ```
 Trello/
   README.md
-  Signup Page/
-  createTeamPage/
   Images/
+  welcome-page/
+  Signup Page/
+  login/
+  createTeamPage/
   index-page/
     dummy data/
     modules/
-  login/
   utilities/
     generateId.js
     properId.js
-  welcome-page/
+  
     
 ```
 
