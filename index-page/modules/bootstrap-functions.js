@@ -40,7 +40,8 @@ export function activateMmodals() {
 				// $("#desc").html(chosenTodo[0].description);
 				
 				
-				$('#desc').attr('placeholder', chosenTodo[0].description)
+				// $('#desc').attr('placeholder', chosenTodo[0].description)
+				$('#desc').val(chosenTodo[0].description)
 			}
 		});
 

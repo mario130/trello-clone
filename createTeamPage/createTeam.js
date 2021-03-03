@@ -20,13 +20,13 @@ $("#haveTeam").click(function () {
   $("#chooseTeam").slideToggle();
 });
 
-$("#addTeamMembers").on("keyup", function (e) {
-  let userNameSpan = $(`<span class="badge bg-secondary me-2"></span>`);
-  //comma , pressed
-  onCommaPress($(this), userNameSpan, e);
-  // enter press
-  onEnterPress($(this), userNameSpan, e);
-});
+// $("#addTeamMembers").on("keyup", function (e) {
+//   let userNameSpan = $(`<span class="badge bg-secondary me-2"></span>`);
+//   //comma , pressed
+//   onCommaPress($(this), userNameSpan, e);
+//   // enter press
+//   onEnterPress($(this), userNameSpan, e);
+// });
 
 $("#createTeam").on("submit", function (e) {
   e.preventDefault();
@@ -152,22 +152,22 @@ $("#chooseTeam").on("submit", function(e){
 
 
 /************** functions************************** */
-function onCommaPress(input, textBadge, e) {
-  if (e.keyCode === 188) {
-    let value = input.val();
-    if (value) {
-      if (value.startsWith("@")) {
-        userName = value.slice(1, -1);
-        addToListWithAt(userName, textBadge) // with @
-      } else {
-        userName = value.slice(0, -1);
-        addToListWithoutAt(textBadge)
-      }
-      completeAddition(input,textBadge)
+// function onCommaPress(input, textBadge, e) {
+//   if (e.keyCode === 188) {
+//     let value = input.val();
+//     if (value) {
+//       if (value.startsWith("@")) {
+//         userName = value.slice(1, -1);
+//         addToListWithAt(userName, textBadge) // with @
+//       } else {
+//         userName = value.slice(0, -1);
+//         addToListWithoutAt(textBadge)
+//       }
+//       completeAddition(input,textBadge)
       
-    }
-  }
-}
+//     }
+//   }
+// }
 
 // push team leader
 let teamLeaderSpan = $(`<span class="badge bg-secondary me-2"></span>`)
@@ -175,66 +175,66 @@ teamLeaderSpan.text(activeUser[0].userName)
 $("#showUsers").append(teamLeaderSpan);
 
 
-function onEnterPress(input, textBadge, e) {
-    e.preventDefault()
-  if (e.keyCode === 13) {
-    let value = input.val();
-    if (value) {
-      if (value.startsWith("@")) {
-        userName = value.slice(1);
-        addToListWithAt(userName, textBadge) // with @
-      } else {
-        userName = value;
-        addToListWithoutAt(textBadge)
-      }
-      completeAddition(input,textBadge)
+// function onEnterPress(input, textBadge, e) {
+//     e.preventDefault()
+//   if (e.keyCode === 13) {
+//     let value = input.val();
+//     if (value) {
+//       if (value.startsWith("@")) {
+//         userName = value.slice(1);
+//         addToListWithAt(userName, textBadge) // with @
+//       } else {
+//         userName = value;
+//         addToListWithoutAt(textBadge)
+//       }
+//       completeAddition(input,textBadge)
       
-    }
-  }
-}
-function addToListWithAt(userName, textBadge){
-  let isUserExist = allUsers.some((elem) => {
-    return elem.userName === userName;
-  });
-  if (isUserExist) {
-    $("#userError").fadeOut();
-    $("#userError").text("");
-    textBadge.text(userName);
-  } else {
-    $("#userError").fadeIn();
-    $("#userError").text("this user doesn't exist");
-  }
-}
-function addToListWithoutAt(textBadge){
-  let isUserExist = allUsers.some((elem) => {
-    return elem.userName === userName;
-  });
+//     }
+//   }
+// }
+// function addToListWithAt(userName, textBadge){
+//   let isUserExist = allUsers.some((elem) => {
+//     return elem.userName === userName;
+//   });
+//   if (isUserExist) {
+//     $("#userError").fadeOut();
+//     $("#userError").text("");
+//     textBadge.text(userName);
+//   } else {
+//     $("#userError").fadeIn();
+//     $("#userError").text("this user doesn't exist");
+//   }
+// }
+// function addToListWithoutAt(textBadge){
+//   let isUserExist = allUsers.some((elem) => {
+//     return elem.userName === userName;
+//   });
 
-  if (isUserExist) {
-    $("#userError").fadeOut();
-    $("#userError").text("");
-    textBadge.text(userName);
-  } else {
-    $("#userError").fadeIn();
-    $("#userError").text("this user doesn't exist");
-  }
-}
-function completeAddition(input, textBadge){
-  if (badgeNames.some(badge => badge === userName)){
-    alert('This user is already in your team!')
-    $('#addTeamMembers').val('')
-  } else {
+//   if (isUserExist) {
+//     $("#userError").fadeOut();
+//     $("#userError").text("");
+//     textBadge.text(userName);
+//   } else {
+//     $("#userError").fadeIn();
+//     $("#userError").text("this user doesn't exist");
+//   }
+// }
+// function completeAddition(input, textBadge){
+//   if (badgeNames.some(badge => badge === userName)){
+//     alert('This user is already in your team!')
+//     $('#addTeamMembers').val('')
+//   } else {
 
-    //push users in array
-    getTeamMembers.push(userName);
+//     //push users in array
+//     getTeamMembers.push(userName);
     
-    $("#showUsers").append(textBadge);
-    input.val("");
+//     $("#showUsers").append(textBadge);
+//     input.val("");
 
-    badgeNames.push(userName)
-    console.log(badgeNames);
-  }
-}
+//     badgeNames.push(userName)
+//     console.log(badgeNames);
+//   }
+// }
 
 // helper functions
 function getData(key) {
