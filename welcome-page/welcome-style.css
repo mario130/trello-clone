@@ -157,6 +157,12 @@ header nav a.sig-up:hover {
   white-space: nowrap;
 }
 
+@media only screen and (max-width: 768px) {
+  .hero form input, .hero form button {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 992px) {
   .hero h1 {
     font-size: 2rem;
